@@ -1,78 +1,38 @@
 <?php
-  if ( empty($_POST['title'])
-    && empty($_POST['description'])
-    && empty($_POST['urgent'])
-    && empty($_POST['status']) )
-  {
-    $_POST['title']       = '';
-    $_POST['description'] = '';
-    $_POST['urgent']      = '';
-    $_POST['status']      = '';
-  }
 
-  else
-  {
-    $title        = trim($_POST['title']);
-    $description  = trim($_POST['description']);
-    $status       = (int)$_POST['status'];
+$headers = array( 
+    'Accept: application/json'
+);
 
-    if(isset($_POST['urgent']))
-      $urgent = 1;
-    else
-      $urgent = 0;
+$ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36';
 
-    $date = date("Y-m-d");
+// Instantiate curl
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, 'https://launchlibrary.net/1.2/launch/next/200/');
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_HTTPHEADER, $headers); 
+curl_setopt($curl, CURLOPT_USERAGENT, $ua);
+$result = curl_exec($curl);
+curl_close($curl);
 
-    if(empty($title))
-      $error_messages[] = "Vous n'avez pas renseigner le titre de la tache";
+// Json decode
+$result = json_decode($result);
 
-    if(empty($description))
-      $error_messages[] = "Vous n'avez pas renseigner la description de la tache";
 
-    if(empty($status))
-      $error_messages[] = "Vous n'avez pas renseigner le status de la tache";
 
-    if(empty($error_messages))
-    {
-      $prepare = $pdo->prepare('INSERT INTO tasks (title, description, date, urgent, status) VALUES (:title, :description, :date, :urgent, :status)');
-      $prepare->bindValue('title', $title);
-      $prepare->bindValue('description', $description);
-      $prepare->bindValue('date', $date);
-      $prepare->bindValue('urgent', $urgent);
-      $prepare->bindValue('status', $status);
-      $prepare->execute();
+for($i = 0; $i < count($result->launches); $i++){
+?> <p><?=$result->launches[$i]->id?></p>
+<p><?=$result->launches[$i]->windowstart?></p>
+<p><?=$result->launches[$i]->windowend?></p>
+<p><?=$result->launches[$i]->name?></p>
+<p><?=$result->launches[$i]->missions[0]->name?></p>
+<p><?=$result->launches[$i]->missions[0]->description?></p>
+<p><?=$result->launches[$i]->vidURLs[0]?></p>
+<?php }
 
-       // Reset values
-       $_POST['title']       = '';
-       $_POST['description'] = '';
-       $_POST['date']        = '';
-       $_POST['urgent']      = '';
-       $_POST['status']      = '';
+//echo '<pre>';
+//print_r($result);
+//echo '</pre>';
+//exit;
 
-       $succes_messages = 'votre tache à bien était ajouter';
-    }
-  }
-  if (!empty($error_messages))
-  {
-    echo '<div class="alert alert--danger">  <a class="alert--btn" href="#">&times</a>';
-    foreach($error_messages as $_error): ?>
-      <?= $_error ?><br>
-    <?php endforeach;
-    echo '</div>';
-  }
-  $error_messages = []; ?>
-  <?php if (!empty($succes_messages))
-  {
-    echo '<div class="alert alert--success"><a class="alert--btn" href="#">&times</a>';
-    echo $succes_messages;
-    echo '</div>';
-  }
-  $succes_messages = []; ?>
-<form class="form" action="#" method="post">
-  <input class="input" type="text" name="title" value="" placeholder="Title">
-  <input class="input" type="text" name="description" value="" placeholder="Description">
-  <label for="checkbox">Urgent :</label>
-  <input id="checkbox" type="checkbox" name="urgent" value="1">
-  <input class="input" type="hidden" name="status" value="1" placeholder="Status">
-  <input class="btn" type="submit" name="validate" value="validate">
-</form>
+?>

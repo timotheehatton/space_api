@@ -5,7 +5,7 @@
 
   if($q == '' || $q == 'page')
     $page = 'page';
-
+    
   else
     $page = '404';
 
