@@ -44,7 +44,7 @@
             </div>
             <div class="item--line"></div>
           </div>
-          <div class="item--month">Mars</div>
+          <div class="item--month"><?=date('F', strtotime($result->launches[$i]->windowstart))?></div>
         </div>
       <?php endfor; ?>
     </div>
