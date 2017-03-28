@@ -17,6 +17,8 @@ $secondary_color : #d0d233;
     width: 100%;
     height: 65px;
     background-color: rgba(#12202e,.50);
+    position: relative;
+    z-index: 2;
     &--logo {
       background-color: $secondary_color;
       height: 45px;
@@ -53,7 +55,6 @@ $secondary_color : #d0d233;
     transition-duration: .5s;
     transition-property: transform;
     height: 100%;
-    overflow: scroll;
     .item {
       text-align: left;
       display: inline-block;
@@ -63,6 +64,7 @@ $secondary_color : #d0d233;
       will-change: transform;
       transition-property: transform;
       &--container {
+        position: relative;
         float: left;
         text-align: center;
         height: 100%;
@@ -160,6 +162,18 @@ $secondary_color : #d0d233;
           right: -5px;
           bottom: -5px;
         }
+        &::before {
+          content: '';
+          display: inline-block;
+          height: 11px;
+          width: 11px;
+          border: 1px solid $secondary_color;
+          position: absolute;
+          border-radius: 50%;
+          right: -5px;
+          bottom: -6px;
+          transform: scale(0.5);
+        }
       }
     }
     .item--active {
@@ -170,9 +184,25 @@ $secondary_color : #d0d233;
         transform: translateY(60px);
       }
       .item--line::after {
-        transform: scale(1.2);
+        transform: scale(0.5);
         background-color: $secondary_color;
       }
+      .item--line::before {
+        transform: scale(1.7);
+      }
+      .item--month {
+        color: $secondary_color;
+      }
+    }
+    .item--month {
+      font-family: 'Raleway', sans-serif;
+      font-size: 12px;
+      bottom: 110px;
+      position: absolute;
+      height: 30px;
+      left: 60%;
+      width: 100px;
+      margin-left: -80px;
     }
   }
   .line {
@@ -183,9 +213,25 @@ $secondary_color : #d0d233;
     background-color: #374857;
     z-index: -2;
   }
-  .previous, .next {
+  .shadow {
+    top: 0;
+    width: 100px;
+    bottom: 0;
     position: absolute;
-    bottom: 50px;
+    z-index: 1;
+    &--left {
+      left: -100px;
+      box-shadow: 0px 0px 150px 100px rgba(#12202B,1);
+    }
+    &--right {
+      right: -100px;
+      box-shadow: 0px 0px 150px 100px rgba(#070e16,1);
+    }
+  }
+  .previous, .next {
+    z-index: 2;
+    position: absolute;
+    bottom: 30px;
     font-size: 12px;
     font-weight: bold;
     &::after {
