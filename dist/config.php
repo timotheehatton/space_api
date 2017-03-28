@@ -17,4 +17,4 @@ catch (Exception $e)
   die('Could not connect');
 }
 
-define('URL','http://localhost:8888/php_template/dist');
+define('URL','http://localhost:8888/dist');
