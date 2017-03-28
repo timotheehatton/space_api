@@ -25,10 +25,15 @@ for($i = 0; $i < count($result->launches); $i++){
 <p><?=$result->launches[$i]->windowstart?></p>
 <p><?=$result->launches[$i]->windowend?></p>
 <p><?=$result->launches[$i]->name?></p>
+<?php if(!empty($result->launches[$i]->missions)){
+for($j = 0; $j < count($result->launches[$i]->missions); $j++){?>
 <p><?=$result->launches[$i]->missions[0]->name?></p>
 <p><?=$result->launches[$i]->missions[0]->description?></p>
+<?php } }
+if(!empty($result->launches[$i]->vidURLs)){?>
 <p><?=$result->launches[$i]->vidURLs[0]?></p>
 <?php }
+}
 
 //echo '<pre>';
 //print_r($result);
