@@ -45,7 +45,10 @@ else
 
   $result = json_decode($result);
 
-
+//echo '<pre>';
+//print_r($result);
+//echo '</pre>';
+//exit();
 
 ?>
     <div class="container">
@@ -65,6 +68,7 @@ else
             <?php foreach($result->launches as $_result): ?>
             <div class="item--container">
                 <div class="item">
+                   <input type="hidden" class="item--id" value="<?=$_result->id?>">
                     <img class="item--img" src="<?=$_result->rocket->imageURL?>" alt="">
                     <div class="item--content">
                         <h2 class="item--content--title">
@@ -76,7 +80,6 @@ else
                             <?= substr($_result->missions[0]->description, 0, 100).'..' ?>
                                 <?php endif; ?>
                         </p>
-
                         <a class="item--content--btn" href="#">
                 <img class="item--content--btn--icon" src="<?=URL?>/assets/img/arrow.png" alt="arrow">Discover the mission
               </a>
@@ -99,20 +102,19 @@ else
     <div class="popin">
         <div class="popin--info">
             <header class="popin--info--header">
-                <h2 class="popin--info--header--title">Falcon Full Thrusts</h2>
+                <h2 class="popin--info--header--title"></h2>
                 <div class="popin--info--header--picture">
-                  <img src="<?=URL?>/assets/img/rocket.jpg" alt="rocket">
+                  <img src="" alt="rocket">
                 </div>
-                <span class="popin--info--header--date">03/01/1996</span>
+                <span class="popin--info--header--date"></span>
             </header>
             <div class="popin--info--content">
-                <span class="popin--info--content--label">Launching from : <span class="popin--info--content--label--txt">Kazakhstan</span></span>
-                <span class="popin--info--content--label">Primary mission : <span class="popin--info--content--label--txt">Soyus MS-04</span></span>
-                <span class="popin--info--content--label">Agencie : <span class="popin--info--content--label--txt">NASA
+                <span class="popin--info--content--label">Launching from : <span class="popin--info--content--label--txt popin-country"></span></span>
+                <span class="popin--info--content--label">Primary mission : <span class="popin--info--content--label--txt popin-mission"></span></span>
+                <span class="popin--info--content--label">Agency(ies) : <span class="popin--info--content--label--txt popin-agency">
                 </span></span>
                 <span class="popin--info--content--title">Description : </span>
-                <p class="popin--info--content--txt">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <p class="popin--info--content--txt popin-description">
                 </p>
             </div>
         </div>
