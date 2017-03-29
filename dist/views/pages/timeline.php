@@ -80,14 +80,18 @@ else
         <div class="popin--info">
             <header class="popin--info--header">
                 <h2 class="popin--info--header--title">Falcon Full Thrusts</h2>
-                <img class="popin--info--header--img" src="<?=URL?>/assets/img/rocket.jpg" alt="">
+                <div class="popin--info--header--picture">
+                  <img src="<?=URL?>/assets/img/rocket.jpg" alt="rocket">
+                </div>
                 <span class="popin--info--header--date">03/01/1996</span>
             </header>
-            <div class="popin--content">
-                <span class="popin--content--label">Launching from<span class="popin--content--label--txt">Kazakhstan</span></span>
-                <span class="popin--content--label">Primary mission<span class="popin--content--label--txt">Soyus MS-04</span></span>
-                <span class="popin--content--title">Description</span>
-                <p class="popin--content--txt">
+            <div class="popin--info--content">
+                <span class="popin--info--content--label">Launching from : <span class="popin--info--content--label--txt">Kazakhstan</span></span>
+                <span class="popin--info--content--label">Primary mission : <span class="popin--info--content--label--txt">Soyus MS-04</span></span>
+                <span class="popin--info--content--label">Agencie : <span class="popin--info--content--label--txt">NASA
+                </span></span>
+                <span class="popin--info--content--title">Description : </span>
+                <p class="popin--info--content--txt">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
@@ -95,7 +99,7 @@ else
         <div class="popin--social">
             <h3 class="popin--social--title">Live tweets</h3>
             <div class="tweeter">
-
+              
             </div>
             <h3 class="popin--social--title">Watch the live</h3>
             <div class="live">
