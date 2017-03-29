@@ -70,12 +70,10 @@ else
                         <span class="item--content--date"><?=$_result->windowstart?></span>
                         <p class="item--content--txt">
                             <?php if(!empty($_result->missions)): ?>
-                            <?=$_result->missions[0]->description?>
+                            <?= substr($_result->missions[0]->description, 0, 100).'..' ?>
                                 <?php endif; ?> 
                         </p>
-                        <p class="location">
-                            <?=$_result->location->name?>
-                        </p>
+                        
                         <a class="item--content--btn" href="#">
                 <img class="item--content--btn--icon" src="<?=URL?>/assets/img/arrow.png" alt="arrow">Discover the mission
               </a>
