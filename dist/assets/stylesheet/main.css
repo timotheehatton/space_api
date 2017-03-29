@@ -265,6 +265,23 @@ body {
   display: -ms-flexbox;
   display: flex;
   color: #fefefe; }
+  .popin--close {
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 38px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: 50%;
+    font-size: 25px;
+    border: 1px solid #374857;
+    color: #374857;
+    display: inline-block;
+    transition-duration: .3s;
+    transition-property: color, background; }
+    .popin--close:hover {
+      color: #10202C;
+      background-color: #374857; }
   .popin--info {
     padding-top: 50px;
     margin-right: 5%;

@@ -314,6 +314,25 @@ body {
   transform: translateY(100%);
   display: flex;
   color: #fefefe;
+  &--close {
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 38px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: 50%;
+    font-size: 25px;
+    border: 1px solid #374857;
+    color: #374857;
+    display: inline-block;
+    transition-duration: .3s;
+    transition-property: color, background;
+    &:hover {
+      color: $primary_color;
+      background-color: #374857;
+    }
+  }
   &--info {
     padding-top: 50px;
     margin-right: 5%;

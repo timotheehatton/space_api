@@ -1,37 +1,32 @@
 <?php
-
   $headers = array('Accept: application/json');
-
   $ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36';
+  $url = "https://launchlibrary.net/1.2/launch/next/200";
 
-$url = "https://launchlibrary.net/1.2/launch/next/200";
+  $path = 'cache/'.md5($url.date("Y-m-d"));
+  $current_path = scandir('cache/', 1);
+  $clean_current_path = array_diff($current_path, array('.', '..'));
 
-$path = 'cache/'.md5($url.date("Y-m-d"));
-$current_path = scandir('cache/', 1);
-$clean_current_path = array_diff($current_path, array('.', '..'));
-
-
-if(!empty($clean_current_path))
-{
-
-    if($path != 'cache/'.$clean_current_path[0]){
-        unlink('cache/'.$clean_current_path[0]);
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($curl, CURLOPT_USERAGENT, $ua);
-        $result = curl_exec($curl);
-        curl_close($curl);
-        file_put_contents($path, $result);
+  if(!empty($clean_current_path))
+  {
+    if($path != 'cache/'.$clean_current_path[0])
+    {
+      unlink('cache/'.$clean_current_path[0]);
+      $curl = curl_init();
+      curl_setopt($curl, CURLOPT_URL, $url);
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+      curl_setopt($curl, CURLOPT_USERAGENT, $ua);
+      $result = curl_exec($curl);
+      curl_close($curl);
+      file_put_contents($path, $result);
     }
     $new_path = scandir('cache/', 1);
     $clean_new_path = array_diff($new_path, array('.', '..'));
     $result = file_get_contents('cache/'.$clean_new_path[0]);
-
-}
-else
-{
+  }
+  else
+  {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -40,92 +35,82 @@ else
     $result = curl_exec($curl);
     curl_close($curl);
     file_put_contents($path, $result);
-}
-
+  }
 
   $result = json_decode($result);
-
-//echo '<pre>';
-//print_r($result);
-//echo '</pre>';
-//exit();
-
 ?>
-    <div class="container">
-        <header class="header">
-          <a href="#" class="header--logo">
-            <img class="header--logo--img" src="<?=URL?>/assets/img/logo.svg" alt="logo">
-          </a>
-            <a class="header--twitter" href="https://twitter.com/LaunchNews_Team" target="_blank">
-              <img src="<?=URL?>/assets/img/twitter.png" alt="">
+<div class="container">
+  <header class="header">
+    <a href="#" class="header--logo">
+      <img class="header--logo--img" src="<?=URL?>/assets/img/logo.svg" alt="logo">
+    </a>
+    <a class="header--twitter" href="https://twitter.com/LaunchNews_Team" target="_blank">
+      <img src="<?=URL?>/assets/img/twitter.png" alt="">
+    </a>
+    <form class="header--search" action="#" method="post">
+      <button class="header--search--btn" type="submit" name="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+      <input class="header--search--input" type="text" name="search" value="" placeholder="Search for a mission">
+    </form>
+  </header>
+  <div class="timeline">
+    <?php foreach($result->launches as $_result): ?>
+      <div class="item--container">
+        <div class="item">
+          <input type="hidden" class="item--id" value="<?=$_result->id?>">
+          <img class="item--img" src="<?=$_result->rocket->imageURL?>" alt="">
+          <div class="item--content">
+            <h2 class="item--content--title"><?= $_result->name ?></h2>
+            <span class="item--content--date"><?=$_result->windowstart?></span>
+            <p class="item--content--txt">
+              <?php if(!empty($_result->missions)): ?>
+                <?= substr($_result->missions[0]->description, 0, 100).'..' ?>
+              <?php endif; ?>
+            </p>
+            <a class="item--content--btn" href="#">
+              <img class="item--content--btn--icon" src="<?=URL?>/assets/img/arrow.png" alt="arrow">Discover the mission
             </a>
-            <form class="header--search" action="#" method="post">
-                <button class="header--search--btn" type="submit" name="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                <input class="header--search--input" type="text" name="search" value="" placeholder="Search for a mission">
-            </form>
-        </header>
-        <div class="timeline">
-            <?php foreach($result->launches as $_result): ?>
-            <div class="item--container">
-                <div class="item">
-                   <input type="hidden" class="item--id" value="<?=$_result->id?>">
-                    <img class="item--img" src="<?=$_result->rocket->imageURL?>" alt="">
-                    <div class="item--content">
-                        <h2 class="item--content--title">
-                            <?= $_result->name ?>
-                        </h2>
-                        <span class="item--content--date"><?=$_result->windowstart?></span>
-                        <p class="item--content--txt">
-                            <?php if(!empty($_result->missions)): ?>
-                            <?= substr($_result->missions[0]->description, 0, 100).'..' ?>
-                                <?php endif; ?>
-                        </p>
-                        <a class="item--content--btn" href="#">
-                <img class="item--content--btn--icon" src="<?=URL?>/assets/img/arrow.png" alt="arrow">Discover the mission
-              </a>
-                    </div>
-                    <div class="item--line"></div>
-                </div>
-                <div class="item--month">
-                    <?=date('F', strtotime($_result->windowstart))?>
-                </div>
-            </div>
-            <?php endforeach; ?>
+          </div>
+          <div class="item--line"></div>
         </div>
-        <a class="previous" href="#">Previous</a>
-        <a class="next" href="#">Next</a>
-        <div class="shadow shadow--left"></div>
-        <div class="shadow shadow--right"></div>
-        <div class="line"></div>
-        <a class="current--mission btn" href="#" target="">what's next</a>
+        <div class="item--month">
+          <?=date('F', strtotime($_result->windowstart))?>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  </div>
+  <a class="previous" href="#">Previous</a>
+  <a class="next" href="#">Next</a>
+  <div class="shadow shadow--left"></div>
+  <div class="shadow shadow--right"></div>
+  <div class="line"></div>
+  <a class="current--mission btn" href="#" target="">what's next</a>
+</div>
+<div class="popin">
+  <a href="#" class="popin--close">&times</a>
+  <div class="popin--info">
+    <header class="popin--info--header">
+      <h2 class="popin--info--header--title"></h2>
+      <div class="popin--info--header--picture">
+        <img src="" alt="rocket">
+      </div>
+      <span class="popin--info--header--date"></span>
+    </header>
+    <div class="popin--info--content">
+      <span class="popin--info--content--label">Launching from : <span class="popin--info--content--label--txt popin-country"></span></span>
+      <span class="popin--info--content--label">Primary mission : <span class="popin--info--content--label--txt popin-mission"></span></span>
+      <span class="popin--info--content--label">Agency(ies) : <span class="popin--info--content--label--txt popin-agency"></span></span>
+      <span class="popin--info--content--title">Description : </span>
+      <p class="popin--info--content--txt popin-description"></p>
     </div>
-    <div class="popin">
-        <div class="popin--info">
-            <header class="popin--info--header">
-                <h2 class="popin--info--header--title"></h2>
-                <div class="popin--info--header--picture">
-                  <img src="" alt="rocket">
-                </div>
-                <span class="popin--info--header--date"></span>
-            </header>
-            <div class="popin--info--content">
-                <span class="popin--info--content--label">Launching from : <span class="popin--info--content--label--txt popin-country"></span></span>
-                <span class="popin--info--content--label">Primary mission : <span class="popin--info--content--label--txt popin-mission"></span></span>
-                <span class="popin--info--content--label">Agency(ies) : <span class="popin--info--content--label--txt popin-agency">
-                </span></span>
-                <span class="popin--info--content--title">Description : </span>
-                <p class="popin--info--content--txt popin-description">
-                </p>
-            </div>
-        </div>
-        <div class="popin--social">
-            <h3 class="popin--social--title">Live tweets</h3>
-            <div class="tweeter">
+  </div>
+  <div class="popin--social">
+    <h3 class="popin--social--title">Live tweets</h3>
+    <div class="tweeter">
 
-            </div>
-            <h3 class="popin--social--title">Watch the live</h3>
-            <div class="live">
-
-            </div>
-        </div>
     </div>
+    <h3 class="popin--social--title">Watch the live</h3>
+    <div class="live">
+
+    </div>
+  </div>
+</div>
