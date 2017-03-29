@@ -57,6 +57,13 @@ body {
         color: $secondary_color;
       }
     }
+    &--twitter {
+      height: 30px;
+      margin-top: 25px;
+      margin-right: 50px;
+      margin-left: 50px;
+      float: right;
+    }
   }
   .timeline {
     transition-duration: .5s;
@@ -154,7 +161,7 @@ body {
         position: absolute;
         top: 50%;
         z-index: -1;
-        left: 60%;
+        left: 50%;
         bottom: 165px;
         transition-duration: .3s;
         transition-property: transform;
@@ -207,9 +214,9 @@ body {
       bottom: 110px;
       position: absolute;
       height: 30px;
-      left: 60%;
+      left: 50%;
       width: 100px;
-      margin-left: -80px;
+      transform: translateX(-50%);
     }
   }
   .line {
@@ -269,6 +276,29 @@ body {
     &::after {
       transform-origin: left;
       left: 0;
+    }
+  }
+  .current--mission {
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    &::after {
+      position: absolute;
+      content: '';
+      display: block;
+      height: 2px;
+      width: 100%;
+      top: 15px;
+      background-color: #fff;
+      transform: scaleX(.5);
+      transition-duration: .3s;
+      transition-property: transform;
+    }
+    &:hover::after {
+      transform: scaleX(1);
     }
   }
 }
@@ -345,7 +375,7 @@ body {
         font-size: 18px;
         border-bottom: 1px solid #384958;
         width: 100%;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
         &--txt {
           font-size: 24px;
           float: right;
