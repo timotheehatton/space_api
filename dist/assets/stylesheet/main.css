@@ -254,6 +254,7 @@ body {
       transform: scaleX(1); }
 
 .popin {
+  overflow-y: scroll;
   transition-duration: .5s;
   transition-property: transform;
   will-change: transform;
@@ -284,6 +285,7 @@ body {
       background-color: #374857; }
   .popin--info {
     padding-top: 50px;
+    padding-bottom: 50px;
     margin-right: 5%;
     margin-left: 5%;
     width: 40%; }
@@ -318,7 +320,7 @@ body {
         left: 0;
         position: absolute;
         color: #d0d233;
-        font-size: 18px; }
+        font-size: 16px; }
         .popin--info--header--date::after {
           content: '';
           display: inline-block;
@@ -334,23 +336,26 @@ body {
       .popin--info--content--label {
         margin-bottom: 40px;
         display: block;
-        font-size: 18px;
+        font-size: 16px;
         border-bottom: 1px solid #384958;
         width: 100%;
         padding-bottom: 20px; }
         .popin--info--content--label--txt {
-          font-size: 24px;
+          font-size: 16px;
           float: right;
           color: #d0d233;
-          text-transform: uppercase; }
+          text-transform: uppercase;
+          text-align: right;
+          width: 60%; }
       .popin--info--content--title {
-        font-size: 18px; }
+        font-size: 16px; }
       .popin--info--content--txt {
         margin-top: 30px;
         font-size: 14px;
         line-height: 21px; }
   .popin--social {
     padding-top: 50px;
+    padding-bottom: 50px;
     margin-right: 5%;
     margin-left: 5%;
     width: 40%; }
@@ -389,8 +394,45 @@ body {
       height: 250px;
       width: 100%;
       margin-top: 30px;
-      background-color: #182B3A;
-      margin-bottom: 50px; }
+      overflow-y: scroll;
+      position: relative; }
+      .popin--social .tweeter::-webkit-scrollbar {
+        width: 0 !important; }
+      .popin--social .tweeter--container {
+        position: relative;
+        overflow: hidden;
+        height: 250px;
+        margin-bottom: 50px; }
+        .popin--social .tweeter--container::after {
+          content: '';
+          display: block;
+          bottom: -50px;
+          position: absolute;
+          width: 100%;
+          box-shadow: 0px -45px 30px 30px #0D151E; }
+      .popin--social .tweeter .tweet {
+        border-right: 2px solid #d0d233;
+        margin-bottom: 5px;
+        background-color: #182B3A;
+        display: block;
+        color: #bfd4e3;
+        font-family: 'Raleway', sans-serif;
+        padding: 15px 20px 15px 20px; }
+        .popin--social .tweeter .tweet--name {
+          font-weight: bold;
+          font-size: 14px; }
+        .popin--social .tweeter .tweet--id {
+          margin-left: 25px;
+          font-size: 10px;
+          color: #657179; }
+        .popin--social .tweeter .tweet--date {
+          font-size: 10px;
+          float: right;
+          color: #657179; }
+        .popin--social .tweeter .tweet--content {
+          margin-top: 15px;
+          font-size: 10px;
+          display: block; }
     .popin--social .live {
       height: 250px;
       width: 100%;

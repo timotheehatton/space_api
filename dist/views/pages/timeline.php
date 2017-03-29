@@ -96,21 +96,50 @@
       <span class="popin--info--header--date"></span>
     </header>
     <div class="popin--info--content">
-      <span class="popin--info--content--label">Launching from : <span class="popin--info--content--label--txt popin-country"></span></span>
-      <span class="popin--info--content--label">Primary mission : <span class="popin--info--content--label--txt popin-mission"></span></span>
-      <span class="popin--info--content--label">Agency(ies) : <span class="popin--info--content--label--txt popin-agency"></span></span>
-      <span class="popin--info--content--title">Description : </span>
+      <span class="popin--info--content--label">Launching from :<span class="popin--info--content--label--txt popin-country"></span></span>
+      <span class="popin--info--content--label">Primary mission :<span class="popin--info--content--label--txt popin-mission"></span></span>
+      <span class="popin--info--content--label">Agency(ies) :<span class="popin--info--content--label--txt popin-agency"></span></span>
+      <span class="popin--info--content--title">Description :</span>
       <p class="popin--info--content--txt popin-description"></p>
     </div>
   </div>
   <div class="popin--social">
     <h3 class="popin--social--title">Live tweets</h3>
-    <div class="tweeter">
-
+    <div class="tweeter--container">
+      <div class="tweeter">
+        <div class="tweet">
+          <span class="tweet--name">Timothée HATTON</span>
+          <a href="#" class="tweet--id">@timotheehatton</a>
+          <a href="#" class="tweet--date">Posted on : 03/01/2018</a>
+          <span class="tweet--content">Wow the launch of mes couilles au bord de l'eau is so awesome</span>
+        </div>
+        <div class="tweet">
+          <span class="tweet--name">Timothée HATTON</span>
+          <a href="#" class="tweet--id">@timotheehatton</a>
+          <a href="#" class="tweet--date">Posted on : 03/01/2018</a>
+          <span class="tweet--content">Wow the launch of mes couilles au bord de l'eau is so awesome</span>
+        </div>
+        <div class="tweet">
+          <span class="tweet--name">Timothée HATTON</span>
+          <a href="#" class="tweet--id">@timotheehatton</a>
+          <a href="#" class="tweet--date">Posted on : 03/01/2018</a>
+          <span class="tweet--content">Wow the launch of mes couilles au bord de l'eau is so awesome</span>
+        </div>
+        <div class="tweet">
+          <span class="tweet--name">Timothée HATTON</span>
+          <a href="#" class="tweet--id">@timotheehatton</a>
+          <a href="#" class="tweet--date">Posted on : 03/01/2018</a>
+          <span class="tweet--content">Wow the launch of mes couilles au bord de l'eau is so awesome</span>
+        </div>
+      </div>
     </div>
     <h3 class="popin--social--title">Watch the live</h3>
     <div class="live">
-
+      <object type="application/x-shockwave-flash" width="100%" height="100%" data="http://www.youtube.com/v/mD1LZU9GJUU">
+        <param name="movie" value="http://www.youtube.com/v/mD1LZU9GJUU" />
+        <param name="wmode" value="transparent" />
+        Vous n'avez pas de navigateur moderne, ni Flash installé...
+       </object>
     </div>
   </div>
 </div>

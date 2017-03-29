@@ -167,8 +167,7 @@ function fetch_data()
 {
   fetch('https://launchlibrary.net/1.2/launch/' + id[timeline_index].value)
   .then((response) => { return response.json(); })
-  .then((result) =>
-  {
+  .then((result) => {
     popin_info_title.innerHTML = result.launches[0].rocket.name;
     popin_info_picture.setAttribute("src", result.launches[0].rocket.imageURL);
     popin_info_date.innerHTML = result.launches[0].windowstart;
