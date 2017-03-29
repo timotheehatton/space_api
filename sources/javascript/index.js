@@ -4,7 +4,8 @@ var timeline     = document.querySelector('.timeline'),
     btn_previous = document.querySelector('.previous'),
     window_width,
     btn_next     = document.querySelector('.next'),
-    popin        = document.querySelector('.popin');
+    popin        = document.querySelector('.popin'),
+    search_bar   = document.querySelector('.header--search--input')
 
 //screen cover
 function cover()
@@ -17,6 +18,20 @@ function cover()
 }
 cover();
 window.addEventListener('resize', cover);
+
+//search 
+search_bar.addEventListener("keyup", function () {
+    for (var i = 0; i < items.length; i++) {
+        if (items[i].querySelector("h2.item--content--title").innerHTML.toUpperCase().lastIndexOf(search_bar.value.toUpperCase()) == -1) {
+            items[i].style.display = "none";
+        } else if (search_bar.value == "") {
+            items[i].style.display = "block";
+        } else {
+            items[i].style.display = "block";
+        }
+    }
+});
+
 
 //timeline
 var i = 0;

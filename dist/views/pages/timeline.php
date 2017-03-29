@@ -6,27 +6,45 @@
 
 $url = "https://launchlibrary.net/1.2/launch/next/200";
 
-$path = 'cache/'.md5($url);
+$path = 'cache/'.md5($url.date("Y-m-d"));
+$current_path = scandir('cache/', 1);
+$clean_current_path = array_diff($current_path, array('.', '..'));
 
 
-if(file_exists($path))
+if(!empty($clean_current_path))
 {
-    $result = file_get_contents($path);
-}
-else
-{
-    $curl = curl_init();
+    
+    if($path != 'cache/'.$clean_current_path[0]){
+        unlink('cache/'.$clean_current_path[0]);
+        $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_USERAGENT, $ua);
         $result = curl_exec($curl);
         curl_close($curl);
+        file_put_contents($path, $result);
+    }
+    $new_path = scandir('cache/', 1);
+    $clean_new_path = array_diff($new_path, array('.', '..'));
+    $result = file_get_contents('cache/'.$clean_new_path[0]);
+    
+}
+else
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_USERAGENT, $ua);
+    $result = curl_exec($curl);
+    curl_close($curl);
     file_put_contents($path, $result);
 }
 
 
   $result = json_decode($result);
+
 
 
 ?>
@@ -53,7 +71,7 @@ else
                         <p class="item--content--txt">
                             <?php if(!empty($_result->missions)): ?>
                             <?=$_result->missions[0]->description?>
-                                <?php endif; ?> }
+                                <?php endif; ?> 
                         </p>
                         <p class="location">
                             <?=$_result->location->name?>
