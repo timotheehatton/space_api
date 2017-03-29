@@ -13,6 +13,9 @@ $secondary_color : #d0d233;
   background-size: cover;
   color: #fff;
   font-family: 'Overpass Mono', monospace;
+  transition-duration: .5s;
+  transition-property: transform;
+  will-change: transform;
   .header {
     width: 100%;
     height: 65px;
@@ -263,5 +266,24 @@ $secondary_color : #d0d233;
       transform-origin: left;
       left: 0;
     }
+  }
+}
+
+.popin {
+  transition-duration: .5s;
+  transition-property: transform;
+  will-change: transform;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: #0D151E;
+  transform: translateY(100%);
+  display: flex;
+  color: #fefefe;
+  &--info {
+    width: 50%;
+  }
+  &--content {
+    width: 50%;
   }
 }
