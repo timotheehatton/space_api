@@ -1,5 +1,12 @@
 <?php
   include 'config.php';
+
+$q = isset($_GET['q']) ? $_GET['q'] : '';
+
+      if($q == 'api') {
+        include('api.php');
+        exit;
+      }
 ?><!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,8 +18,6 @@
   </head>
   <body>
     <?php
-      $q = isset($_GET['q']) ? $_GET['q'] : '';
-
       if($q == '' || $q == 'timeline')
         $page = 'timeline';
 
