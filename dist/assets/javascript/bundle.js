@@ -22,7 +22,9 @@ var timeline = document.querySelector('.timeline'),
     popin_info_agency = document.querySelector('.popin-agency'),
     popin_info_description = document.querySelector('.popin-description'),
     popin_close = document.querySelector('.popin--close'),
-    popin_live = document.querySelector('.live object');
+    popin_live = document.querySelector('.live object'),
+    loader = document.querySelector('.loader'),
+    next_launch = document.querySelector('.next--launch');
 
 //screen cover
 function cover() {
@@ -56,15 +58,18 @@ search_bar.addEventListener("keyup", function () {
 });
 
 //timeline
-var timeline_index = 0;
+next_launch = next_launch.classList;
+next_launch = parseInt(next_launch[2]);
+
+var timeline_index = next_launch;
 items[timeline_index].classList.add('item--active');
-timeline.style.transform = 'translate(' + window_width / 2 + 'px)';
+timeline.style.transform = 'translate(-' + window_width / 2 * (timeline_index - 1) + 'px)';
 
 //current mission
 function current_mission() {
   items[timeline_index].classList.remove('item--active');
-  timeline_index = 0;
-  timeline.style.transform = 'translate(' + window_width / 2 + 'px)';
+  timeline_index = next_launch;
+  timeline.style.transform = 'translate(-' + window_width / 2 * (timeline_index - 1) + 'px)';
   items[timeline_index].classList.add('item--active');
 }
 
@@ -157,7 +162,6 @@ function fetch_data() {
   fetch('https://launchlibrary.net/1.2/launch/' + id[timeline_index].value).then(function (response) {
     return response.json();
   }).then(function (result) {
-    console.log(result);
     popin_info_title.innerHTML = result.launches[0].rocket.name;
 
     popin_info_picture.setAttribute("src", result.launches[0].rocket.imageURL);
@@ -179,20 +183,13 @@ function fetch_for_search(search_value) {
   var mm = today.getMonth() + 1;
   var yyyy = today.getFullYear();
 
-  if (dd < 10) {
-    dd = '0' + dd;
-  }
-
-  if (mm < 10) {
-    mm = '0' + mm;
-  }
-
+  if (dd < 10) dd = '0' + dd;
+  if (mm < 10) mm = '0' + mm;
   today = yyyy + '-' + mm + '-' + dd;
 
   fetch('https://launchlibrary.net/1.2/launch/' + search_value).then(function (response) {
     return response.json();
   }).then(function (result) {
-    console.log(result);
     for (var i = 0; i < result.launches.length; i++) {
       if (moment(result.launches[i].windowstart).format("YYYY-MM-DD") > today) {
         var search_result = document.createElement("div");
@@ -203,7 +200,15 @@ function fetch_for_search(search_value) {
   });
 }
 
-//    var data = new FormData() 
+function showPage() {
+  loader.classList.add('loader--fadeout');
+  setTimeout(function () {
+    loader.remove();
+  }, 500);
+}
+setTimeout(showPage, 3000);
+
+//    var data = new FormData()
 //    data.append('name', 'John Doe')
 //    data.append('email', 'contact@local.dev')
 //    var xhr = getHttpRequest()

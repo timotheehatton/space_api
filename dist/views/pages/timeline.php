@@ -11,7 +11,7 @@
 
   if(!empty($clean_current_path))
   {
-    
+
     if($path != 'cache/'.$clean_current_path[0])
     {
       unlink('cache/'.$clean_current_path[0]);
@@ -45,14 +45,14 @@
 
   //TWEETS
   require "twitter_files/autoload.php";
-  
+
   use Abraham\TwitterOAuth\TwitterOAuth;
-  
+
   define('CONSUMER_KEY', 'hASTzw8wcV8PX2RLjoaDBJCUS');
   define('CONSUMER_SECRET', '3FOwXtPrdVCOEIB3nnSwfuZ8hPXlf4dD6ZznscJNBzoexLUWIs');
   define('ACCESS_TOKEN', '846653122328084480-2aGOsrM0kj7wh82L78RzuM1usUslG8u');
   define('ACCESS_TOKEN_SECRET', 'zPW7lL7EJnueASe4Zz45542AkGzymh6PMkaoGhGzwX1SR');
-   
+
   function search(array $query)
   {
     $toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
@@ -61,28 +61,39 @@
 
 
 ?>
+<div class="loader">
+  <div class="loading">Just loading</div>
+  <div class="loading--buffering">
+    <div class="loading--wait"></div>
+    <div class="loading--wait"></div>
+    <div class="loading--wait"></div>
+  </div>
+</div>
 <div class="container">
   <header class="header">
     <a href="#" class="header--logo">
       <img class="header--logo--img" src="<?=URL?>/assets/img/logo.svg" alt="logo">
     </a>
     <a class="header--twitter" href="https://twitter.com/LaunchNews_Team" target="_blank">
-      <img src="<?=URL?>/assets/img/twitter.png" alt="">
+      <i class="fa fa-twitter" aria-hidden="true"></i>
     </a>
     <form class="header--search" action="#" method="post">
       <button class="header--search--btn" type="submit" name="button"><i class="fa fa-search" aria-hidden="true"></i></button>
       <input class="header--search--input" type="text" name="search" value="" placeholder="Search for a mission">
-      <div class="header--search--results"> 
+      <div class="header--search--results">
       </div>
     </form>
   </header>
   <div class="timeline">
-    <?php foreach($result->launches as $_result): 
-      $datetime1 = new DateTime(date("Y-m-d")); 
-      $datetime2 = new DateTime(date('Y-m-d', strtotime($_result->windowstart))); 
-      $diff = $datetime2->diff($datetime1)->format("%a");
+    <?php
+      $count = 0;
+
+      foreach($result->launches as $_result):
+        $datetime1 = new DateTime(date("Y-m-d"));
+        $datetime2 = new DateTime(date('Y-m-d', strtotime($_result->windowstart)));
+        $diff = $datetime2->diff($datetime1)->format("%a");
       ?>
-      <div class="item--container <?=$datetime1>$datetime2?'item--past':''?>">
+      <div class="item--container <?=$datetime1>$datetime2?'item--past': "next--launch " . $count?>">
         <div class="item">
           <input type="hidden" class="item--id" value="<?=$_result->id?>">
           <img class="item--img" src="<?=$_result->rocket->imageURL?>" alt="">
@@ -99,13 +110,15 @@
               <img class="item--content--btn--icon" src="<?=URL?>/assets/img/arrow.png" alt="arrow">Discover the mission
             </a>
           </div>
-          <div class="item--line"></div>
         </div>
+        <div class="item--line"></div>
         <div class="item--month">
           <?=date('F d, Y', strtotime($_result->windowstart))?>
         </div>
       </div>
-    <?php endforeach; ?>
+    <?php
+      $count ++;
+    endforeach; ?>
   </div>
   <a class="previous" href="#">Previous</a>
   <a class="next" href="#">Next</a>
@@ -118,7 +131,7 @@
   <a href="#" class="popin--close">&times</a>
   <div class="popin--info">
     <header class="popin--info--header">
-      <h2 class="popin--info--header--title"></h2> 
+      <h2 class="popin--info--header--title"></h2>
       <input type="hidden" name="popin_title" class="popin--info--header--title--hidden">
       <div class="popin--info--header--picture">
         <img src="" alt="rocket">
@@ -137,7 +150,7 @@
     <h3 class="popin--social--title">Live tweets</h3>
     <div class="tweeter--container">
       <div class="tweeter">
-       <?php 
+       <?php
             $query = array(
                 "q" => $_POST['data'],
                 "count"=> 100,
@@ -152,9 +165,9 @@
         <div class="tweet">
           <span class="tweet--name"><?=$result->user->name?></span>
           <a target="_blank" href="https://twitter.com/<?=$result->user->screen_name?>" class="tweet--id"><?="@".$result->user->screen_name?></a>
-          <?php 
-          $datetime1 = date_create(date("d-m-Y H:i:s")); 
-          $datetime2 = date_create(date('d-m-Y H:i:s', strtotime($result->created_at))); 
+          <?php
+          $datetime1 = date_create(date("d-m-Y H:i:s"));
+          $datetime2 = date_create(date('d-m-Y H:i:s', strtotime($result->created_at)));
           $interval = date_diff($datetime1, $datetime2);?>
           <a target="_blank" href="https://twitter.com/<?=$result->user->screen_name?>/status/<?=$result->id?>" class="tweet--date"><?=$interval->format('%d')<+1?$interval->format('%H')."h":date('M d', strtotime($result->created_at))?></a>
           <span class="tweet--content"><?=$result->full_text?></span>
@@ -166,7 +179,7 @@
           <a target="_blank" href="https://twitter.com/<?=$result->user->screen_name?>" class="tweet--id"><?="@".$result->user->screen_name?></a>
           <a target="_blank" href="https://twitter.com/<?=$result->user->screen_name?>/status/<?=$result->id?>" class="tweet--date">Posted on : <?=date('Y-m-d H:i', strtotime($result->created_at))?></a>
           <span class="tweet--content"><?=$result->full_text?></span>
-        </div>       
+        </div>
             <?php } endforeach; ?>
       </div>
     </div>

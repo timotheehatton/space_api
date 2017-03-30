@@ -22,7 +22,6 @@ body {
     position: relative;
     z-index: 2; }
     .container .header--logo {
-      background-color: #d0d233;
       height: 45px;
       margin-top: 10px;
       margin-left: 50px;
@@ -57,11 +56,17 @@ body {
         color: black;
         display: none; }
     .container .header--twitter {
+      color: #55ACEE;
       height: 30px;
-      margin-top: 25px;
+      font-size: 22px;
+      margin-top: 22px;
       margin-right: 50px;
       margin-left: 50px;
-      float: right; }
+      float: right;
+      transition-duration: .3s;
+      transition-property: color; }
+      .container .header--twitter:hover {
+        color: #2795e9; }
   .container .timeline {
     transition-duration: .5s;
     transition-property: transform;
@@ -149,7 +154,7 @@ body {
         top: 50%;
         z-index: -1;
         left: 50%;
-        bottom: 165px;
+        bottom: 195px;
         transition-duration: .3s;
         transition-property: transform; }
         .container .timeline .item--line::after {
@@ -171,12 +176,15 @@ body {
           position: absolute;
           border-radius: 50%;
           right: -5px;
-          bottom: -6px;
+          bottom: -5px;
           transform: scale(0.5); }
+    .container .timeline .item--past .item--img {
+      filter: grayscale(100%); }
+    .container .timeline .item--past .item--content {
+      background-color: #3c3f42;
+      color: #7d8287; }
     .container .timeline .item--active .item {
       transform: translateY(-60px); }
-    .container .timeline .item--active .item--line {
-      transform: translateY(60px); }
     .container .timeline .item--active .item--line::after {
       transform: scale(0.5);
       background-color: #d0d233; }
@@ -186,18 +194,19 @@ body {
       color: #d0d233; }
     .container .timeline .item--month {
       font-family: 'Raleway', sans-serif;
-      font-size: 12px;
-      bottom: 110px;
+      font-size: 14px;
+      text-align: center;
+      bottom: 140px;
       position: absolute;
       height: 30px;
       left: 50%;
-      width: 100px;
-      transform: translateX(-50%); }
+      width: 150px;
+      margin-left: -75px; }
   .container .line {
     width: 100%;
     height: 1px;
     position: absolute;
-    bottom: 100px;
+    bottom: 130px;
     background-color: #374857;
     z-index: -2; }
   .container .shadow {
@@ -277,7 +286,7 @@ body {
   color: #fefefe; }
   .popin--close {
     height: 40px;
-    width: 40px;
+    width: 45px;
     text-align: center;
     line-height: 38px;
     margin-top: 20px;
@@ -452,5 +461,57 @@ body {
       margin-top: 30px;
       background-color: #000;
       margin-bottom: 50px; }
+
+.loader {
+  background-image: url("../img/background.jpg");
+  background-size: cover;
+  color: #ececec;
+  background-color: #000;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 10000;
+  transition-duration: .5s;
+  transition-property: opacity; }
+  .loader--fadeout {
+    opacity: 0; }
+  .loader .loading {
+    animation: loader 0.6s infinite ease-in-out alternate-reverse;
+    font-family: Raleway;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 900;
+    font-size: 48px;
+    transform: translateY(50vh); }
+    .loader .loading--buffering {
+      margin: 0 auto;
+      transform: translateY(55vh);
+      text-align: center; }
+    .loader .loading--wait {
+      display: inline-block;
+      background: #ececec;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      animation: wait 0.3s infinite ease-in-out alternate-reverse; }
+      .loader .loading--wait:nth-child(1) {
+        animation-delay: 0.2s; }
+      .loader .loading--wait:nth-child(3) {
+        animation-delay: 0.4s; }
+      .loader .loading--wait:nth-child(2) {
+        animation-delay: 0.3s; }
+
+@keyframes loader {
+  0% {
+    opacity: 0.6; }
+  100% {
+    opacity: 0; } }
+
+@keyframes wait {
+  0% {
+    opacity: 0.2; }
+  100% {
+    transform: translateY(-10px);
+    opacity: 0; } }
 
 /*# sourceMappingURL=main.css.map */
