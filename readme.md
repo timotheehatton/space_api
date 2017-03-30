@@ -54,10 +54,11 @@ In order to communicate with APIs : Twitter OAuth and Launch Library.
 
 ## Team
 
-## Team
-
-
-[![Timothé Hatton](https://avatars0.githubusercontent.com/u/17114378?v=3&s=144)](https://github.com/timothee-h)|[![Naïm El Ayadi](https://avatars2.githubusercontent.com/u/17248868?v=3&s=144)](https://github.com/naim-ea)|[![Adrien Laurent](https://avatars0.githubusercontent.com/u/17247174?v=3&s=144)](https://github.com/AdrienLaurent2)|
-[![Félix Lesouef](https://avatars0.githubusercontent.com/u/25010959?v=3&s=144)](https://github.com/FelixLesouef)|[![Clarisse Garcia](https://avatars0.githubusercontent.com/u/25010953?v=3&s=144)](https://github.com/klarine)|[![Lola Calmejane](https://avatars1.githubusercontent.com/u/17294233?v=3&s=144)](https://github.com/LolaCalmejane)
+[![Timothé Hatton](https://avatars0.githubusercontent.com/u/17114378?v=3&s=144)](https://github.com/timothee-h)
+[![Naïm El Ayadi](https://avatars2.githubusercontent.com/u/17248868?v=3&s=144)](https://github.com/naim-ea)
+[![Adrien Laurent](https://avatars0.githubusercontent.com/u/17247174?v=3&s=144)](https://github.com/AdrienLaurent2)
+[[Félix Lesouef]](https://github.com/FelixLesouef)
+[[Clarisse Garcia]](https://github.com/klarine)
+[[Lola Calmejane]](https://github.com/LolaCalmejane)
 
 HETIC ©
