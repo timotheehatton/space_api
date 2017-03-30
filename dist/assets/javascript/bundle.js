@@ -36,7 +36,22 @@ window.addEventListener('resize', cover);
 
 //search
 search_bar.addEventListener("keyup", function () {
-  fetch_for_search(search_bar.value);
+  search_results.innerHTML = "";
+  for (var i = 0; i < items.length; i++) {
+    if (items[i].innerHTML.toUpperCase().includes(search_bar.value.toUpperCase())) {
+      search_results.style.display = "block";
+      var search_result = document.createElement("div");
+      search_result.innerHTML = items[i].children[0].children[2].children[0].innerHTML;
+      search_result.addEventListener('click', function (e) {
+        timeline_index = i;
+      });
+      search_results.appendChild(search_result);
+    } else if (search_bar.value == "") {
+      search_results.style.display = "none";
+    } else {
+      search_results.style.display = "none";
+    }
+  }
 });
 
 //timeline
