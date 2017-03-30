@@ -19,7 +19,7 @@ var timeline                 = document.querySelector('.timeline'),
     popin_info_agency        = document.querySelector('.popin-agency'),
     popin_info_description   = document.querySelector('.popin-description'),
     popin_close              = document.querySelector('.popin--close'),
-    popin_live               = document.querySelector('.live object'),
+    popin_live               = document.querySelector('.live'),
     loader                   = document.querySelector('.loader'),
     next_launch              = document.querySelector('.next--launch'),
     popin_twitter            = document.querySelector('.tweeter');
@@ -164,6 +164,7 @@ function fetch_data() {
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           var response = JSON.parse(this.responseText);
+          console.log(response);
           popin_twitter.innerHTML = "";
           if(response.statuses.length == 0){
             popin_twitter.innerHTML = "No tweets found !";
@@ -177,7 +178,7 @@ function fetch_data() {
           }
         }
       };
-      xhttp.open("GET", "dist/api?name=" + popin_info_title.innerHTML, true);
+      xhttp.open("GET", "api.php?name=" + popin_info_title.innerHTML, true);
       xhttp.send();
 
       popin_info_picture.setAttribute("src", result.launches[0].rocket.imageURL);
@@ -193,7 +194,7 @@ function fetch_data() {
           popin_info_agency.innerHTML = popin_info_agency.innerHTML + ", " + result.launches[0].location.pads[0].agencies[i].name;
       }
       popin_info_description.innerHTML = result.launches[0].missions[0].description;
-      popin_live.setAttribute("data", result.launches[0].vidURLs[0]);
+      popin_live.innerHTML = result.launches[0].vidURLs[0];
     });
 }
 
@@ -204,7 +205,7 @@ function showPage() {
     loader.remove();
   }, 500);
 }
-setTimeout(showPage, 2000);
+setTimeout(showPage, 3000);
 
 //Display correct date
 function parseTwitterDate(tdate) {

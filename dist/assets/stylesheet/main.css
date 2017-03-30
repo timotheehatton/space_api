@@ -382,7 +382,6 @@ body {
       font-weight: 900;
       text-transform: uppercase;
       position: relative;
-      font-family: 'Raleway', sans-serif;
       display: inline-block; }
       .popin--social--title:nth-child(1)::before {
         background-image: url("../img/twitter.png"); }

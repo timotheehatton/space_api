@@ -3,10 +3,7 @@
 
 $q = isset($_GET['q']) ? $_GET['q'] : '';
 
-      if($q == 'api') {
-        include('api.php');
-        exit;
-      }
+
 ?><!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,6 +26,7 @@ $q = isset($_GET['q']) ? $_GET['q'] : '';
 
       include 'views/pages/'.$page.'.php';
     ?>
+    <script src="./assets/javascript/moment.js"></script>
     <script src="./assets/javascript/bundle.js"></script>
   </body>
 </html>

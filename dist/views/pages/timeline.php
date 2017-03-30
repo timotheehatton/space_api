@@ -134,12 +134,7 @@
       </div>
     </div>
     <h3 class="popin--social--title">Watch the live</h3>
-    <div class="live">
-      <object type="application/x-shockwave-flash" width="100%" height="100%" data="http://www.youtube.com/v/mD1LZU9GJUU">
-        <param name="movie" value="http://www.youtube.com/v/mD1LZU9GJUU" />
-        <param name="wmode" value="transparent" />
-        Vous n'avez pas de navigateur moderne, ni Flash installé...
-       </object>
+    <div class="live"></div>
     </div>
   </div>
 </div>
