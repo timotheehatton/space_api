@@ -75,7 +75,7 @@
         $datetime2 = new DateTime(date('Y-m-d', strtotime($_result->windowstart)));
         $diff = $datetime2->diff($datetime1)->format("%a");
       ?>
-      <div class="item--container <?=$datetime1>$datetime2?'item--past': "next--launch " . $count?>">
+      <div class="item--container <?=$datetime1>$datetime2?'item--past': "next--launch " . $count?> <?=$_result->id?>">
         <div class="item">
           <input type="hidden" class="item--id" value="<?=$_result->id?>">
           <img class="item--img" src="<?=$_result->rocket->imageURL?>" alt="">
@@ -126,7 +126,7 @@
       <span class="popin--info--content--label">Agency(ies) :<span class="popin--info--content--label--txt popin-agency"></span></span>
       <span class="popin--info--content--title">Description :</span>
       <p class="popin--info--content--txt popin-description"></p>
-      <span class="popin--info--content--rocket">More info about the rocket <a href="#" class="popin--info--content--rocket--link">here</a></span>
+      <span class="popin--info--content--rocket">More info about the rocket <a target="_blank" href="#" class="popin--info--content--rocket--link">here</a></span>
     </div>
   </div>
   <div class="popin--social">
@@ -140,8 +140,9 @@
       Watch the live <a href="#" class="live--link" target="_blank">here</a>
     </div>
     <h3 class="popin--social--title">Stay tuned</h3>
-    <form class="popin--newsletter" action="#" method="post">
-      <input class="popin--newsletter--email" placeholder="Email" type="text" name="email" value="">
+    <form class="popin--newsletter" action="newsletter.php" method="post">
+      <input class="popin--newsletter--email" placeholder="Email" type="email" name="email" value="">
+      <input type="hidden" name="mission-hidden" class="mission--hidden">
       <input class="popin--newsletter--submit" type="submit" name="submit" value="Submit">
     </form>
     </div>

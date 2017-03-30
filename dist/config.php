@@ -1,21 +1,22 @@
 <?php
-
 // Connexion variables
 define('DB_HOST','localhost');
-define('DB_NAME','todolist');
+define('DB_NAME','newsletter');
 define('DB_USER','root');
 define('DB_PASS','root'); // '' par défaut sur windows
 
 try
 {
-  $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME,DB_USER,DB_PASS);
+    // Try to connect to database
+    $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME,DB_USER,DB_PASS);
 
-  $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
+    // Set fetch mode to object
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
 }
 catch (Exception $e)
 {
-  die('Could not connect');
+    // Failed to connect
+    die('Could not connect');
 }
 
-define('URL','http://localhost:8888/dist');
-
+define('URL','http://localhost:8888/space_api/dist');

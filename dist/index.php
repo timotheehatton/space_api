@@ -3,7 +3,6 @@
 
 $q = isset($_GET['q']) ? $_GET['q'] : '';
 
-
 ?><!DOCTYPE html>
 <html lang="en">
   <head>

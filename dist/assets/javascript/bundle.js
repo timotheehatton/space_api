@@ -25,7 +25,19 @@ var timeline = document.querySelector('.timeline'),
     popin_live = document.querySelector('.live--link'),
     loader = document.querySelector('.loader'),
     next_launch = document.querySelector('.next--launch'),
-    popin_twitter = document.querySelector('.tweeter');
+    popin_twitter = document.querySelector('.tweeter'),
+    popin_wiki = document.querySelector('.popin--info--content--rocket--link'),
+    popin_mission_hidden = document.querySelector('.mission--hidden');
+
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+    vars[key] = value;
+  });
+  return vars;
+}
+
+var url = getUrlVars()["rocket"];
 
 //screen cover
 function cover() {
@@ -60,6 +72,11 @@ next_launch = next_launch.classList;
 next_launch = parseInt(next_launch[2]);
 
 var timeline_index = next_launch;
+for (var i = 0; i < items.length; i++) {
+  if (items[i].classList.contains(url)) {
+    timeline_index = i;
+  }
+}
 items[timeline_index].classList.add('item--active');
 timeline.style.transform = 'translate(-' + window_width / 2 * (timeline_index - 1) + 'px)';
 
@@ -193,6 +210,8 @@ function fetch_data() {
     }
     popin_info_description.innerHTML = result.launches[0].missions[0].description;
     popin_live.setAttribute('href', result.launches[0].vidURLs[0]);
+    popin_wiki.setAttribute('href', result.launches[0].rocket.wikiURL);
+    popin_mission_hidden.value = result.launches[0].name;
   });
 }
 
