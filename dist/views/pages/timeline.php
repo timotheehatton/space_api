@@ -52,15 +52,16 @@
 </div>
 <div class="container">
   <header class="header">
-    <a href="#" class="header--logo">
+    <a href="index.php" class="header--logo">
       <img class="header--logo--img" src="<?=URL?>/assets/img/logo.svg" alt="logo">
+      <span class="header--logo--title">Upcoming space launches</span>
     </a>
     <a class="header--twitter" href="https://twitter.com/LaunchNews_Team" target="_blank">
       <i class="fa fa-twitter" aria-hidden="true"></i>
     </a>
     <form class="header--search" action="#" method="post">
       <button class="header--search--btn" type="submit" name="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-      <input class="header--search--input" type="text" name="search" value="" placeholder="Search for a mission">
+      <input class="header--search--input" type="text" name="search" value="" placeholder="Search for a mission...">
       <div class="header--search--results">
       </div>
     </form>
@@ -125,6 +126,7 @@
       <span class="popin--info--content--label">Agency(ies) :<span class="popin--info--content--label--txt popin-agency"></span></span>
       <span class="popin--info--content--title">Description :</span>
       <p class="popin--info--content--txt popin-description"></p>
+      <span class="popin--info--content--rocket">More info about the rocket <a href="#" class="popin--info--content--rocket--link">here</a></span>
     </div>
   </div>
   <div class="popin--social">
@@ -134,7 +136,14 @@
       </div>
     </div>
     <h3 class="popin--social--title">Watch the live</h3>
-    <div class="live"></div>
+    <div class="live">
+      Watch the live <a href="#" class="live--link" target="_blank">here</a>
+    </div>
+    <h3 class="popin--social--title">Stay tuned</h3>
+    <form class="popin--newsletter" action="#" method="post">
+      <input class="popin--newsletter--email" placeholder="Email" type="text" name="email" value="">
+      <input class="popin--newsletter--submit" type="submit" name="submit" value="Submit">
+    </form>
     </div>
   </div>
 </div>

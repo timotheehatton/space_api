@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Raleway:400,700,900");
 body {
-  font-family: 'Overpass Mono', monospace; }
+  font-family: 'Raleway', sans-serif; }
 
 .container {
   position: fixed;
@@ -11,7 +11,6 @@ body {
   background-image: url("../img/background.jpg");
   background-size: cover;
   color: #fff;
-  font-family: 'Overpass Mono', monospace;
   transition-duration: .5s;
   transition-property: transform;
   will-change: transform; }
@@ -27,6 +26,12 @@ body {
       margin-left: 50px;
       display: inline-block;
       float: left; }
+      .container .header--logo--title {
+        margin-left: 10px;
+        position: relative;
+        bottom: 10px;
+        font-size: 18px;
+        font-weight: 600; }
       .container .header--logo--img {
         height: 100%; }
     .container .header--search {
@@ -45,7 +50,7 @@ body {
         cursor: pointer;
         position: relative;
         top: 5px;
-        margin-right: 5px;
+        margin-right: 7px;
         color: #d0d233; }
       .container .header--search--results {
         width: 150%;
@@ -109,8 +114,8 @@ body {
           font-size: 12px;
           color: #d0d233; }
         .container .timeline .item--content--txt {
-          margin-top: 20px;
-          font-size: 10px;
+          margin-top: 15px;
+          font-size: 12px;
           line-height: 15px; }
         .container .timeline .item--content--btn {
           position: absolute;
@@ -227,6 +232,15 @@ body {
     bottom: 30px;
     font-size: 12px;
     font-weight: bold; }
+    .container .previous::before, .container .next::before {
+      content: '';
+      background-image: url("../img/arrow_left.svg");
+      background-size: cover;
+      display: inline-block;
+      position: absolute;
+      height: 18px;
+      top: -2px;
+      width: 9px; }
     .container .previous::after, .container .next::after {
       position: absolute;
       content: '';
@@ -245,11 +259,16 @@ body {
     .container .previous::after {
       transform-origin: right;
       right: 0; }
+    .container .previous::before {
+      left: -27px; }
   .container .next {
     right: 50px; }
     .container .next::after {
       transform-origin: left;
       left: 0; }
+    .container .next::before {
+      transform: rotate(180deg);
+      right: -27px; }
   .container .current--mission {
     font-size: 12px;
     font-weight: bold;
@@ -286,7 +305,7 @@ body {
   color: #fefefe; }
   .popin--close {
     height: 40px;
-    width: 45px;
+    width: 40px;
     text-align: center;
     line-height: 38px;
     margin-top: 20px;
@@ -350,21 +369,31 @@ body {
           background-color: #d0d233; }
     .popin--info--content {
       position: relative;
-      margin-top: 150px; }
+      margin-top: 150px;
+      font-family: 'Raleway', sans-serif; }
+      .popin--info--content--rocket {
+        margin-top: 20px;
+        display: inline-block;
+        font-size: 14px;
+        position: relative;
+        margin-bottom: 50px; }
+        .popin--info--content--rocket--link {
+          text-transform: uppercase;
+          color: #d0d233; }
       .popin--info--content--label {
         margin-bottom: 40px;
         display: block;
         font-size: 16px;
+        line-height: 24px;
         border-bottom: 1px solid #384958;
         width: 100%;
         padding-bottom: 20px; }
         .popin--info--content--label--txt {
-          font-size: 16px;
+          font-size: 14px;
           float: right;
           color: #d0d233;
           text-transform: uppercase;
-          text-align: right;
-          width: 60%; }
+          text-align: right; }
       .popin--info--content--title {
         font-size: 16px; }
       .popin--info--content--txt {
@@ -378,10 +407,12 @@ body {
     margin-left: 5%;
     width: 40%; }
     .popin--social--title {
+      display: block;
       font-size: 24px;
       font-weight: 900;
       text-transform: uppercase;
       position: relative;
+      font-family: 'Raleway', sans-serif;
       display: inline-block; }
       .popin--social--title:nth-child(1)::before {
         background-image: url("../img/twitter.png"); }
@@ -409,17 +440,20 @@ body {
         margin-top: 10px;
         background-color: #d0d233; }
     .popin--social .tweeter {
-      height: 250px;
+      color: grey;
+      font-family: Raleway;
+      height: 350px;
       width: 100%;
       margin-top: 30px;
       overflow-y: scroll;
-      position: relative; }
+      position: relative;
+      padding-bottom: 50px; }
       .popin--social .tweeter::-webkit-scrollbar {
         width: 0 !important; }
       .popin--social .tweeter--container {
         position: relative;
         overflow: hidden;
-        height: 250px;
+        height: 350px;
         margin-bottom: 50px; }
         .popin--social .tweeter--container::after {
           content: '';
@@ -456,11 +490,49 @@ body {
           margin-top: 10px;
           text-align: center; }
     .popin--social .live {
-      height: 250px;
+      display: block;
       width: 100%;
       margin-top: 30px;
-      background-color: #000;
-      margin-bottom: 50px; }
+      margin-bottom: 50px;
+      transition-duration: .3s;
+      transition-property: color;
+      font-family: Raleway;
+      font-size: 14px; }
+      .popin--social .live--link {
+        text-transform: uppercase;
+        color: #d0d233; }
+  .popin--newsletter {
+    margin-top: 30px; }
+    .popin--newsletter--email {
+      font-family: Raleway;
+      font-size: 14px;
+      width: 250px;
+      height: 33px !important;
+      padding: 10px;
+      display: inline-block;
+      background-color: rgba(24, 43, 58, 0.5);
+      border-bottom: 1px solid #384958;
+      transition-duration: .3s;
+      transition-property: border; }
+      .popin--newsletter--email:focus {
+        border-bottom: 1px solid #d0d233; }
+    .popin--newsletter--submit {
+      font-family: Raleway;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-left: 20px;
+      display: inline-block;
+      height: 33px !important;
+      width: 130px !important;
+      line-height: 33px;
+      text-align: center;
+      transition-duration: .3s;
+      transition-property: background;
+      border: 1px solid #d0d233; }
+      .popin--newsletter--submit:hover {
+        background-color: #d0d233; }
 
 .loader {
   background-image: url("../img/background.jpg");

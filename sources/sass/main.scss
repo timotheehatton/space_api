@@ -4,7 +4,7 @@ $primary_color : #10202C;
 $secondary_color : #d0d233;
 
 body {
-  font-family: 'Overpass Mono', monospace;
+  font-family: 'Raleway', sans-serif;
 }
 
 .container {
@@ -16,7 +16,6 @@ body {
   background-image: url('../img/background.jpg');
   background-size: cover;
   color: #fff;
-  font-family: 'Overpass Mono', monospace;
   transition-duration: .5s;
   transition-property: transform;
   will-change: transform;
@@ -32,6 +31,13 @@ body {
       margin-left: 50px;
       display: inline-block;
       float: left;
+      &--title {
+        margin-left: 10px;
+        position: relative;
+        bottom: 10px;
+        font-size: 18px;
+        font-weight: 600;
+      }
       &--img {
         height: 100%;
       }
@@ -53,7 +59,7 @@ body {
         cursor: pointer;
         position: relative;
         top: 5px;
-        margin-right: 5px;
+        margin-right: 7px;
         color: $secondary_color;
       }
       &--results {
@@ -127,8 +133,8 @@ body {
           color: $secondary_color;
         }
         &--txt {
-          margin-top: 20px;
-          font-size: 10px;
+          margin-top: 15px;
+          font-size: 12px;
           line-height: 15px;
         }
         &--btn {
@@ -271,6 +277,16 @@ body {
     bottom: 30px;
     font-size: 12px;
     font-weight: bold;
+    &::before {
+      content: '';
+      background-image: url('../img/arrow_left.svg');
+      background-size: cover;
+      display: inline-block;
+      position: absolute;
+      height: 18px;
+      top: -2px;
+      width: 9px;
+    }
     &::after {
       position: absolute;
       content: '';
@@ -293,12 +309,19 @@ body {
       transform-origin: right;
       right: 0;
     }
+    &::before {
+      left: -27px;
+    }
   }
   .next {
     right: 50px;
     &::after {
       transform-origin: left;
       left: 0;
+    }
+    &::before {
+      transform: rotate(180deg);
+      right: -27px;
     }
   }
   .current--mission {
@@ -340,7 +363,7 @@ body {
   color: #fefefe;
   &--close {
     height: 40px;
-    width: 45px;
+    width: 40px;
     text-align: center;
     line-height: 38px;
     margin-top: 20px;
@@ -413,20 +436,32 @@ body {
     &--content {
       position: relative;
       margin-top: 150px;
+      font-family: 'Raleway', sans-serif;
+      &--rocket {
+        margin-top: 20px;
+        display: inline-block;
+        font-size: 14px;
+        position: relative;
+        margin-bottom: 50px;
+        &--link {
+          text-transform: uppercase;
+          color: $secondary_color;
+        }
+      }
       &--label {
         margin-bottom: 40px;
         display: block;
         font-size: 16px;
+        line-height: 24px;
         border-bottom: 1px solid #384958;
         width: 100%;
         padding-bottom: 20px;
         &--txt {
-          font-size: 16px;
+          font-size: 14px;
           float: right;
           color: $secondary_color;
           text-transform: uppercase;
           text-align: right;
-          width: 60%;
         }
       }
       &--title {
@@ -446,10 +481,12 @@ body {
     margin-left: 5%;
     width: 40%;
     &--title {
+      display: block;
       font-size: 24px;
       font-weight: 900;
       text-transform: uppercase;
       position: relative;
+      font-family: 'Raleway', sans-serif;
       display: inline-block;
       &:nth-child(1)::before {
         background-image: url('../img/twitter.png');
@@ -482,16 +519,19 @@ body {
       }
     }
     .tweeter {
-      height: 250px;
+      color: grey;
+      font-family: Raleway;
+      height: 350px;
       width: 100%;
       margin-top: 30px;
       overflow-y: scroll;
       position: relative;
+      padding-bottom: 50px;
       &::-webkit-scrollbar { width: 0 !important }
       &--container {
         position: relative;
         overflow: hidden;
-        height: 250px;
+        height: 350px;
         margin-bottom: 50px;
         &::after {
           content: '';
@@ -537,11 +577,55 @@ body {
       }
     }
     .live {
-      height: 250px;
+      display: block;
       width: 100%;
       margin-top: 30px;
-      background-color: #000;
       margin-bottom: 50px;
+      transition-duration: .3s;
+      transition-property: color;
+      font-family: Raleway;
+      font-size: 14px;
+      &--link {
+        text-transform: uppercase;
+        color: $secondary_color;
+      }
+    }
+  }
+  &--newsletter {
+    margin-top: 30px;
+    &--email {
+      font-family: Raleway;
+      font-size: 14px;
+      width: 250px;
+      height: 33px !important;
+      padding: 10px;
+      display: inline-block;
+      background-color: rgba(#182B3A,.50);
+      border-bottom: 1px solid #384958;
+      transition-duration: .3s;
+      transition-property: border;
+      &:focus {
+        border-bottom: 1px solid $secondary_color;
+      }
+    }
+    &--submit {
+      font-family: Raleway;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-left: 20px;
+      display: inline-block;
+      height: 33px !important;
+      width: 130px !important;
+      line-height: 33px;
+      text-align: center;
+      transition-duration: .3s;
+      transition-property: background;
+      border: 1px solid $secondary_color;
+      &:hover {
+        background-color: $secondary_color;
+      }
     }
   }
 }
