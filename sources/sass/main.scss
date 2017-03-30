@@ -41,6 +41,7 @@ body {
       margin-top: 20px;
       float: right;
       margin-right: 50px;
+      position: relative;
       &--input {
         font-family: 'Raleway', sans-serif;
         font-size: 12px;
@@ -56,6 +57,15 @@ body {
         margin-right: 5px;
         color: $secondary_color;
       }
+      &--results {
+      width: 150%;
+      background: white;
+      height: 400px;
+      position: absolute;
+      top: 100%;
+      color: black;
+      display: none;  
+      } 
     }
     &--twitter {
       height: 30px;
@@ -63,7 +73,7 @@ body {
       margin-right: 50px;
       margin-left: 50px;
       float: right;
-    }
+    } 
   }
   .timeline {
     transition-duration: .5s;
@@ -486,7 +496,7 @@ body {
         display: block;
         color: #bfd4e3;
         font-family: 'Raleway', sans-serif;
-        padding: 15px 20px 15px 20px;
+        padding: 15px 20px 15px 20px;  
         &--name {
           font-weight: bold;
           font-size: 14px;
@@ -505,6 +515,11 @@ body {
           margin-top: 15px;
           font-size: 10px;
           display: block;
+        }
+        &--picture {
+          width: 85%;
+          margin-top: 10px;
+          text-align: center;
         }
       }
     }

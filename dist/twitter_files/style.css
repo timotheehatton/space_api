@@ -1,0 +1,31 @@
+blockquote.twitter-tweet {
+    display: inline-block;
+    padding: 16px;
+    margin: 10px 0;
+    max-width: 468px;
+    border: #ddd 1px solid;
+    border-top-color: #eee;
+    border-bottom-color: #bbb;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    font: bold 14px/18px Helvetica, Arial, sans-serif;
+    color: #000;
+}
+
+blockquote.twitter-tweet span:first-of-type{
+    font-weight: bold;
+}
+
+blockquote.twitter-tweet span:nth-of-type(2){
+    font-size: 10px;
+}
+
+blockquote.twitter-tweet a[href^="https://twitter.com"] {
+    font-weight: normal;
+    color: #666;
+    font-size: 12px;
+}
+
+blockquote.twitter-tweet img {
+    width: 100%;
+}

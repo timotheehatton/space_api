@@ -24,6 +24,7 @@
 
       include 'views/pages/'.$page.'.php';
     ?>
+    <script src="./assets/javascript/moment.js"></script>
     <script src="./assets/javascript/bundle.js"></script>
   </body>
 </html>
