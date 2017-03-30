@@ -12,6 +12,7 @@ You can test a working live demo at https://launch-news.space
 
 ## Install locally
 - npm install in terminal
+- Set up config file
 - Connect in localhost with MAMP
 
 ## Website
@@ -21,16 +22,16 @@ Here's the main section of our website :
 
 > You can navigate among all the missions upcoming
 
-![](http://www.giphy.com/gifs/xUPGcHzf8MbXLNnYOY)
+![](https://media.giphy.com/media/xUPGcHzf8MbXLNnYOY/giphy.gif)
 
 ### Mission Details
 That's the description section when you click on mission's call to action :
 
 > You get any information about the mission like tweets, launching position, agency's name...
 
-![](http://www.giphy.com/gifs/xUPGcHhAOMPIhDu7gA)
+![](https://media.giphy.com/media/xUPGcHhAOMPIhDu7gA/giphy.gif)
 
-![](http://www.giphy.com/gifs/xUA7b4jvi42fklUP9S)
+![](https://media.giphy.com/media/xUA7b4jvi42fklUP9S/giphy.gif)
 
 ### Bug
 
@@ -53,6 +54,10 @@ In order to communicate with APIs : Twitter OAuth and Launch Library.
 
 ## Team
 
-[![Timothé Hatton](https://avatars0.githubusercontent.com/u/17114378?v=3&s=144)](https://github.com/timothee-h)|[![Naïm El Ayadi](https://avatars2.githubusercontent.com/u/17248868?v=3&s=460)](https://github.com/naim-ea)|[![Félix Lesouef](https://avatars0.githubusercontent.com/u/25010959?v=3&s=460)](https://github.com/FelixLesouef)|[![Clarisse Garcia](https://avatars0.githubusercontent.com/u/25010953?v=3&s=460)](https://github.com/klarine)|[![Adrien Laurent](https://avatars0.githubusercontent.com/u/17247174?v=3&s=460)](https://github.com/AdrienLaurent2)|[![Lola Calmejane](https://avatars1.githubusercontent.com/u/17294233?v=3&s=460)](https://github.com/LolaCalmejane)
+## Team
+
+
+[![Timothé Hatton](https://avatars0.githubusercontent.com/u/17114378?v=3&s=144)](https://github.com/timothee-h)|[![Naïm El Ayadi](https://avatars2.githubusercontent.com/u/17248868?v=3&s=144)](https://github.com/naim-ea)|[![Adrien Laurent](https://avatars0.githubusercontent.com/u/17247174?v=3&s=144)](https://github.com/AdrienLaurent2)|
+[![Félix Lesouef](https://avatars0.githubusercontent.com/u/25010959?v=3&s=144)](https://github.com/FelixLesouef)|[![Clarisse Garcia](https://avatars0.githubusercontent.com/u/25010953?v=3&s=144)](https://github.com/klarine)|[![Lola Calmejane](https://avatars1.githubusercontent.com/u/17294233?v=3&s=144)](https://github.com/LolaCalmejane)
 
 HETIC ©
