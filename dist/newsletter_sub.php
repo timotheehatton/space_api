@@ -1,47 +1,34 @@
-<?php 
-include_once "config.php";
+<?php
+include 'config.php';
+if(!empty($_POST)){
+    
+  $add_mail = $_POST["email"];
+  $add_mission = $_POST["mission-hidden"];
+  $query = $pdo->prepare('INSERT INTO emails(email, mission) VALUES (:email, :mission)');
+  $query->bindValue(':email', $add_mail);
+  $query->bindValue(':mission', $add_mission);
+  $exec = $query->execute();
+  $success_message["success"] = "Bravo, you added something boring to do !";
 
-$headers = array('Accept: application/json');
-  $ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36';
-  $url = "https://launchlibrary.net/1.2/launch/?startdate=".date('Y-m-d', strtotime(' -2 day'))."&enddate=".date("Y-m-d", strtotime("+1 week"))."&limit=500";
 
-$curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($curl, CURLOPT_USERAGENT, $ua);
-    $result = curl_exec($curl);
-    curl_close($curl);
+  $mail = 'launch-news.space';
+  if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
+  {
+    $passage_ligne = "\r\n";
+  }
+  else
+  {
+    $passage_ligne = "\n";
+  }
 
-$result = json_decode($result);
-
-foreach($result->launches as $_result){
-    $req = $pdo->query("SELECT * FROM emails");
-    $email_list = $req->fetchAll();
-    foreach($email_list as $_email){
-      if($_result->name==$_email->mission){
-          $mail = 'launch-news.space';
-          if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
-          {
-            $passage_ligne = "\r\n";
-          }
-          else
-          {
-            $passage_ligne = "\n";
-          }
-
-          // HEADER GENERIQUE ************************************************************************************
-          $headers = 'From:'.$mail.$passage_ligne;
-          $headers .= 'Reply-To: '.$_email->email.'>'.$passage_ligne;
-          $headers .= 'MIME-Version: 1.0' . $passage_ligne;
-          $headers .= "X-Priority: 3" . $passage_ligne;
-          $headers .= 'Content-Type: text/html; charset="utf-8"'. $passage_ligne;
-
-          // CONSTRUCTION DU MESSAGE *****************************************************************************
-          $datetime1 = new DateTime(date("Y-m-d"));
-          $datetime2 = new DateTime(date('Y-m-d', strtotime($_result->windowstart)));
-          $diff = $datetime2->diff($datetime1)->format("%a");
-              $message = '<html xmlns="http://www.w3.org/1999/xhtml">
+  // HEADER GENERIQUE ************************************************************************************
+  $headers = 'From:'.$mail.$passage_ligne;
+  $headers .= 'Reply-To: '.$add_mail.'>'.$passage_ligne;
+  $headers .= 'MIME-Version: 1.0' . $passage_ligne;
+  $headers .= "X-Priority: 3" . $passage_ligne;
+  $headers .= 'Content-Type: text/html; charset="utf-8"'. $passage_ligne;
+  // CONSTRUCTION DU MESSAGE *****************************************************************************
+  $message = '<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Launch News</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -90,23 +77,13 @@ foreach($result->launches as $_result){
                           <table class="w580"  width="580" cellpadding="0" cellspacing="0" border="0">
                             <tbody>
                               <tr>
-                                <td class="w580"  width="580">'
-                if($datetime1>$datetime2){'
-                                  <h2 style="color:#10202C; font-size:22px; padding-top:12px;">'.$_result->status==3||1?$_result->name.' has been launched ! Bon voyage !':$_result->name.' has failed... Good luck next time ! </h2>
+                                <td class="w580"  width="580">
+                                  <h2 style="color:#10202C; font-size:22px; padding-top:12px;">You subscribed to the Launch News newsletter for '.$add_mission.'</h2>
                                   <div align="left" class="article-content">
                                     <p>
-                                      We will stop spamming you for a while now
+                                      Thanks for subscribing to our newsletter for the '.$add_mission.' mission. You will soon be updated with some crispy news from us ! :)
                                     </p>
                                   </div>
-                                  ' } else if($diff<=7){'
-                                  <h2 style="color:#10202C; font-size:22px; padding-top:12px;">'.$_result->name.' is being launched in '.$diff.' days. </h2>
-                                  <div align="left" class="article-content">
-                                  </div>
-                                  ' } else if($diff<=1) {'
-                                  <h2 style="color:#10202C; font-size:22px; padding-top:12px;">'.$_result->name.' is being launched in '.$diff.' days. </h2>
-                                  <div align="left" class="article-content">
-                                  </div>
-                                  ' } '
                                 </td>
                               </tr>
                               <tr><td class="w580"  width="580" height="1" bgcolor="#c7c5c5"></td></tr>
@@ -148,12 +125,9 @@ foreach($result->launches as $_result){
   </table>
 </body>
 </html>';
-          
-          }
 
-          mail($_email->email, "News about ".$_email->mission, $message, $headers);
-      }
-    }
+
+  mail($add_mail, "You subscribed to the Launch News Newsletter", $message, $headers);
 }
-
-    ?>
+header("Location: index.php");
+?>

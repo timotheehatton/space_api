@@ -140,7 +140,7 @@
       Watch the live <a href="#" class="live--link" target="_blank">here</a>
     </div>
     <h3 class="popin--social--title">Stay tuned</h3>
-    <form class="popin--newsletter" action="newsletter.php" method="post">
+    <form class="popin--newsletter" action="newsletter_sub.php" method="post">
       <input class="popin--newsletter--email" placeholder="Email" type="email" name="email" value="">
       <input type="hidden" name="mission-hidden" class="mission--hidden">
       <input class="popin--newsletter--submit" type="submit" name="submit" value="Submit">

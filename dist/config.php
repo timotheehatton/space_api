@@ -1,14 +1,13 @@
 <?php
-// Connexion variables
-define('DB_HOST','localhost');
-define('DB_NAME','newsletter');
-define('DB_USER','root');
-define('DB_PASS','root'); // '' par défaut sur windows
+define('DB_HOST','launchnehjspace.mysql.db');
+define('DB_NAME','launchnehjspace');
+define('DB_USER','launchnehjspace');
+define('DB_PASS','1677Swidswid'); // '' par défaut sur windows
 
 try
 {
     // Try to connect to database
-    $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME,DB_USER,DB_PASS);
+    $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USER,DB_PASS);
 
     // Set fetch mode to object
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
@@ -19,4 +18,4 @@ catch (Exception $e)
     die('Could not connect');
 }
 
-define('URL','http://localhost:8888/space_api/dist');
+define('URL','http://launch-news.space/');

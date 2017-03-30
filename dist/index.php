@@ -7,7 +7,7 @@ $q = isset($_GET['q']) ? $_GET['q'] : '';
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>space API</title>
+    <title>Launch News</title>
     <link rel="stylesheet" href="./assets/stylesheet/reset.css">
     <link rel="stylesheet" href="./assets/stylesheet/font_awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/stylesheet/main.css">

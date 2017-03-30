@@ -36,22 +36,22 @@ foreach($result->launches as $_result):
         $datetime1 = new DateTime(date("Y-m-d"));
         $datetime2 = new DateTime(date('Y-m-d', strtotime($_result->windowstart)));
         $diff = $datetime2->diff($datetime1)->format("%a");
-  if($datetime1>$datetime2){
-        $message = $_result->status==3||1?$_result->name." has been launched ! Bon voyage !":$_result->name." has failed... Good luck next time ! http://launch-news.space/dist/index.php?rocket=".$_result->id;
-      $media = $_result->rocket->imageURL;
+        if($datetime1>$datetime2){
+              $message = $_result->status==3||1?$_result->name." has been launched ! Bon voyage !":$_result->name." has failed... Good luck next time ! http://launch-news.space/index.php?rocket=".$_result->id;
+              $media = $_result->rocket->imageURL;
 
-        $twitter->post('statuses/update', array('status' => $message, 'media_ids[]'=>$media));
-  }
-  else if($diff<=7){
-    $message = $_result->name." is being launched in ".$diff." days. http://launch-news.space/dist/index.php?rocket=".$_result->id;
-    $media = $_result->rocket->imageURL;
+              $twitter->post('statuses/update', array('status' => $message, 'media_ids[]'=>$media));
+        }
+        else if($diff<=7){
+              $message = $_result->name." is being launched in ".$diff." days. http://launch-news.space/index.php?rocket=".$_result->id;
+              $media = $_result->rocket->imageURL;
 
-        $twitter->post('statuses/update', array('status' => $message, 'media_ids[]'=>$media));
-  }
-else if($diff<=1){
-$message = $_result->name." is being launched in a day. http://launch-news.space/dist/index.php?rocket=".$_result->id;
-  $media = $_result->rocket->imageURL;
+              $twitter->post('statuses/update', array('status' => $message, 'media_ids[]'=>$media));
+        }
+        else if($diff<=1){
+              $message = $_result->name." is being launched in a day. http://launch-news.space/index.php?rocket=".$_result->id;
+              $media = $_result->rocket->imageURL;
 
-    $twitter->post('statuses/update', array('status' => $message, 'media_ids[]'=>$media));
-}
+              $twitter->post('statuses/update', array('status' => $message, 'media_ids[]'=>$media));
+        }
 endforeach;
