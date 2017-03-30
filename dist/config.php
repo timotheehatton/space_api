@@ -17,4 +17,4 @@ catch (Exception $e)
   die('Could not connect');
 }
 
-define('URL','http://localhost:8888/space_api/dist');
+define('URL','http://localhost:8888/');

@@ -42,25 +42,8 @@
 
   $result = json_decode($result);
 
-
-  //TWEETS
-  require "twitter_files/autoload.php";
-  
-  use Abraham\TwitterOAuth\TwitterOAuth;
-  
-  define('CONSUMER_KEY', 'hASTzw8wcV8PX2RLjoaDBJCUS');
-  define('CONSUMER_SECRET', '3FOwXtPrdVCOEIB3nnSwfuZ8hPXlf4dD6ZznscJNBzoexLUWIs');
-  define('ACCESS_TOKEN', '846653122328084480-2aGOsrM0kj7wh82L78RzuM1usUslG8u');
-  define('ACCESS_TOKEN_SECRET', 'zPW7lL7EJnueASe4Zz45542AkGzymh6PMkaoGhGzwX1SR');
-   
-  function search(array $query)
-  {
-    $toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
-    return $toa->get('search/tweets', $query);
-  }
-
-
 ?>
+
 <div class="container">
   <header class="header">
     <a href="#" class="header--logo">
@@ -137,37 +120,6 @@
     <h3 class="popin--social--title">Live tweets</h3>
     <div class="tweeter--container">
       <div class="tweeter">
-       <?php 
-            $query = array(
-                "q" => $_POST['data'],
-                "count"=> 100,
-                "lang"=>"en",
-                "result_type"=>"mixed",
-                "include_entities"=>true,
-                "tweet_mode" => "extended"
-            );
-            $results = search($query);
-            foreach ($results->statuses as $result):
-                if(isset($result->entities->media)){?>
-        <div class="tweet">
-          <span class="tweet--name"><?=$result->user->name?></span>
-          <a target="_blank" href="https://twitter.com/<?=$result->user->screen_name?>" class="tweet--id"><?="@".$result->user->screen_name?></a>
-          <?php 
-          $datetime1 = date_create(date("d-m-Y H:i:s")); 
-          $datetime2 = date_create(date('d-m-Y H:i:s', strtotime($result->created_at))); 
-          $interval = date_diff($datetime1, $datetime2);?>
-          <a target="_blank" href="https://twitter.com/<?=$result->user->screen_name?>/status/<?=$result->id?>" class="tweet--date"><?=$interval->format('%d')<+1?$interval->format('%H')."h":date('M d', strtotime($result->created_at))?></a>
-          <span class="tweet--content"><?=$result->full_text?></span>
-          <img src='<?=$result->entities->media[0]->media_url?>' class="tweet--picture"></img>
-        </div>
-               <?php } else { ?>
-        <div class="tweet">
-          <span class="tweet--name"><?=$result->user->name?></span>
-          <a target="_blank" href="https://twitter.com/<?=$result->user->screen_name?>" class="tweet--id"><?="@".$result->user->screen_name?></a>
-          <a target="_blank" href="https://twitter.com/<?=$result->user->screen_name?>/status/<?=$result->id?>" class="tweet--date">Posted on : <?=date('Y-m-d H:i', strtotime($result->created_at))?></a>
-          <span class="tweet--content"><?=$result->full_text?></span>
-        </div>       
-            <?php } endforeach; ?>
       </div>
     </div>
     <h3 class="popin--social--title">Watch the live</h3>
