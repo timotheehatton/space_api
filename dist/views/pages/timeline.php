@@ -3,7 +3,7 @@
 //LAUNCHLIBRARY API
   $headers = array('Accept: application/json');
   $ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36';
-  $url = "https://launchlibrary.net/1.2/launch/next/200";
+  $url = "https://launchlibrary.net/1.2/launch/?startdate=".date('Y-m-d', strtotime(date("Y-m-d").'-1 year'))."&limit=500";
 
   $path = 'cache/'.md5($url.date("Y-m-d"));
   $current_path = scandir('cache/', 1);
@@ -11,6 +11,7 @@
 
   if(!empty($clean_current_path))
   {
+    
     if($path != 'cache/'.$clean_current_path[0])
     {
       unlink('cache/'.$clean_current_path[0]);
@@ -58,6 +59,7 @@
     return $toa->get('search/tweets', $query);
   }
 
+
 ?>
 <div class="container">
   <header class="header">
@@ -75,19 +77,19 @@
     </form>
   </header>
   <div class="timeline">
-    <?php foreach($result->launches as $_result): ?>
-      <div class="item--container">
+    <?php foreach($result->launches as $_result): 
+      $datetime1 = new DateTime(date("Y-m-d")); 
+      $datetime2 = new DateTime(date('Y-m-d', strtotime($_result->windowstart))); 
+      $diff = $datetime2->diff($datetime1)->format("%a");
+      ?>
+      <div class="item--container <?=$datetime1>$datetime2?'item--past':''?>">
         <div class="item">
           <input type="hidden" class="item--id" value="<?=$_result->id?>">
           <img class="item--img" src="<?=$_result->rocket->imageURL?>" alt="">
           <div class="item--content">
             <h2 class="item--content--title"><?= $_result->name ?></h2>
-            <?php 
-            $datetime1 = date_create(date("d-m-Y H:i:s")); 
-            $datetime2 = date_create(date('d-m-Y H:i:s', strtotime($_result->windowstart))); 
-            $interval = date_diff($datetime1, $datetime2);
-            ?>
-            <span class="item--content--date"><?=$interval->format("%d")==0?'Today':$interval->format("%d")==1?'Tommorow':$interval->format("%d")." days left"?></span>
+            <span class="item--content--date">
+            <?=$datetime1>$datetime2?$diff." days ago":$diff." days left"?></span>
             <p class="item--content--txt">
               <?php if(!empty($_result->missions)): ?>
                 <?= substr($_result->missions[0]->description, 0, 100).'..' ?>
@@ -116,7 +118,8 @@
   <a href="#" class="popin--close">&times</a>
   <div class="popin--info">
     <header class="popin--info--header">
-      <h2 class="popin--info--header--title"></h2>
+      <h2 class="popin--info--header--title"></h2> 
+      <input type="hidden" name="popin_title" class="popin--info--header--title--hidden">
       <div class="popin--info--header--picture">
         <img src="" alt="rocket">
       </div>
@@ -136,7 +139,7 @@
       <div class="tweeter">
        <?php 
             $query = array(
-                "q" => "Ariane 5",
+                "q" => $_POST['data'],
                 "count"=> 100,
                 "lang"=>"en",
                 "result_type"=>"mixed",

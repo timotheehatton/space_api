@@ -11,6 +11,7 @@ var timeline                 = document.querySelector('.timeline'),
     search_results           = document.querySelector('.header--search--results'),
     id                       = document.querySelectorAll('.item--id'),
     popin_info_title         = document.querySelector('.popin--info--header--title'),
+    popin_info_title_hidden  = document.querySelector('.popin--info--header--title--hidden'),
     popin_info_picture       = document.querySelector('.popin--info--header--picture img'),
     popin_info_date          = document.querySelector('.popin--info--header--date'),
     popin_info_country       = document.querySelector('.popin-country'),
@@ -127,6 +128,7 @@ for (var i = 0; i < item_btn.length; i++)
   {
     fade_in();
     event.preventDefault();
+    fetch_data();
   });
 }
 
@@ -179,6 +181,7 @@ function fetch_data()
   .then((result) => {
     console.log(result);  
     popin_info_title.innerHTML = result.launches[0].rocket.name;
+    
     popin_info_picture.setAttribute("src", result.launches[0].rocket.imageURL);
     popin_info_date.innerHTML = result.launches[0].windowstart;
     popin_info_country.innerHTML = result.launches[0].location.name;
@@ -225,3 +228,11 @@ function fetch_for_search(search_value){
     }
   });
 }
+
+//    var data = new FormData() 
+//    data.append('name', 'John Doe')
+//    data.append('email', 'contact@local.dev')
+//    var xhr = getHttpRequest()
+//    xhr.open('POST', 'index.php', true)
+//    xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
+//    xhr.send(data)
