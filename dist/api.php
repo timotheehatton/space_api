@@ -19,7 +19,6 @@
   $query = array(
       "q" => $name,
       "count"=> 100,
-      "lang"=>"en",
       "result_type"=>"mixed",
       "include_entities"=>true,
       "tweet_mode" => "extended"

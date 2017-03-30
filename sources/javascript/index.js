@@ -45,7 +45,7 @@ search_bar.addEventListener("keyup", function () {
       search_results.style.display = "none";
     } else {
       search_results.style.display = "block";
-      var search_result = document.createElement("div");
+      var search_result = document.createElement("span");
       search_result.innerHTML = items[i].children[0].children[2].children[0].innerHTML;
       search_results.appendChild(search_result);
     }
@@ -164,15 +164,16 @@ function fetch_data() {
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           var response = JSON.parse(this.responseText);
+          console.log(response);
           popin_twitter.innerHTML = "";
           if(response.statuses.length == 0){
             popin_twitter.innerHTML = "No tweets found !";
           }
           for (var i = 0; i < response.statuses.length; i++) {
             if (response.statuses[i].entities.media === undefined) {
-              popin_twitter.innerHTML = popin_twitter.innerHTML + "<div class='tweet'><span class='tweet--name'>" + response.statuses[i].user.name + "</span><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "' class='tweet--id'>@" + response.statuses[i].user.screen_name + "</a><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "/status/" + response.statuses[i].id + "' class='tweet--date'>yo</a><span class='tweet--content'>" + response.statuses[i].full_text + "</span></div>";
+              popin_twitter.innerHTML = popin_twitter.innerHTML + "<div class='tweet'><span class='tweet--name'>" + response.statuses[i].user.name + "</span><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "' class='tweet--id'>@" + response.statuses[i].user.screen_name + "</a><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "/status/" + response.statuses[i].id + "' class='tweet--date'>"+parseTwitterDate(response.statuses[i].created_at)+"</a><span class='tweet--content'>" + response.statuses[i].full_text + "</span></div>";
             } else {
-              popin_twitter.innerHTML = popin_twitter.innerHTML + "<div class='tweet'><span class='tweet--name'>" + response.statuses[i].user.name + "</span><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "' class='tweet--id'>@" + response.statuses[i].user.screen_name + "</a><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "/status/" + response.statuses[i].id + "' class='tweet--date'>yo</a><span class='tweet--content'>" + response.statuses[i].full_text + "</span><img src='" + response.statuses[i].entities.media[0].media_url + "' class='tweet--picture'></img></div>";
+              popin_twitter.innerHTML = popin_twitter.innerHTML + "<div class='tweet'><span class='tweet--name'>" + response.statuses[i].user.name + "</span><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "' class='tweet--id'>@" + response.statuses[i].user.screen_name + "</a><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "/status/" + response.statuses[i].id + "' class='tweet--date'>"+parseTwitterDate(response.statuses[i].created_at)+"</a><span class='tweet--content'>" + response.statuses[i].full_text + "</span><img src='" + response.statuses[i].entities.media[0].media_url + "' class='tweet--picture'></img></div>";
             }
           }
         }
@@ -205,3 +206,32 @@ function showPage() {
   }, 500);
 }
 setTimeout(showPage, 3000);
+
+//Display correct date
+function parseTwitterDate(tdate) {
+    var system_date = new Date(Date.parse(tdate));
+    var user_date = new Date();
+    if (K.ie) {
+        system_date = Date.parse(tdate.replace(/( \+)/, ' UTC$1'))
+    }
+    var diff = Math.floor((user_date - system_date) / 1000);
+    if (diff <= 1) {return "Just now";}
+    if (diff < 20) {return diff + " seconds ago";}
+    if (diff < 40) {return "A minute ago";}
+    if (diff < 60) {return "Less than a minute ago";}
+    if (diff <= 90) {return "A minute ago";}
+    if (diff <= 3540) {return Math.round(diff / 60) + " minutes ago";}
+    if (diff <= 5400) {return "A hour ago";}
+    if (diff <= 86400) {return Math.round(diff / 3600) + " hours ago";}
+    if (diff <= 129600) {return "A day ago";}
+    if (diff < 604800) {return Math.round(diff / 86400) + " days ago";}
+    if (diff <= 777600) {return "A week ago";}
+    return system_date;
+}
+
+var K = function () {
+    var a = navigator.userAgent;
+    return {
+        ie: a.match(/MSIE\s([^;]*)/)
+    }
+}();

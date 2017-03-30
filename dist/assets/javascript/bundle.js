@@ -23,12 +23,9 @@ var timeline = document.querySelector('.timeline'),
     popin_info_description = document.querySelector('.popin-description'),
     popin_close = document.querySelector('.popin--close'),
     popin_live = document.querySelector('.live object'),
-<<<<<<< HEAD
     loader = document.querySelector('.loader'),
-    next_launch = document.querySelector('.next--launch');
-=======
+    next_launch = document.querySelector('.next--launch'),
     popin_twitter = document.querySelector('.tweeter');
->>>>>>> e834294d0f33ffbe1aab1f77e1150a1027d25187
 
 //screen cover
 function cover() {
@@ -51,7 +48,7 @@ search_bar.addEventListener("keyup", function () {
       search_results.style.display = "none";
     } else {
       search_results.style.display = "block";
-      var search_result = document.createElement("div");
+      var search_result = document.createElement("span");
       search_result.innerHTML = items[i].children[0].children[2].children[0].innerHTML;
       search_results.appendChild(search_result);
     }
@@ -169,16 +166,16 @@ function fetch_data() {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         var response = JSON.parse(this.responseText);
-        popin_twitter.innerHTML = "";
         console.log(response);
+        popin_twitter.innerHTML = "";
         if (response.statuses.length == 0) {
           popin_twitter.innerHTML = "No tweets found !";
         }
         for (var i = 0; i < response.statuses.length; i++) {
           if (response.statuses[i].entities.media === undefined) {
-            popin_twitter.innerHTML = popin_twitter.innerHTML + "<div class='tweet'><span class='tweet--name'>" + response.statuses[i].user.name + "</span><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "' class='tweet--id'>@" + response.statuses[i].user.screen_name + "</a><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "/status/" + response.statuses[i].id + "' class='tweet--date'>yo</a><span class='tweet--content'>" + response.statuses[i].full_text + "</span></div>";
+            popin_twitter.innerHTML = popin_twitter.innerHTML + "<div class='tweet'><span class='tweet--name'>" + response.statuses[i].user.name + "</span><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "' class='tweet--id'>@" + response.statuses[i].user.screen_name + "</a><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "/status/" + response.statuses[i].id + "' class='tweet--date'>" + parseTwitterDate(response.statuses[i].created_at) + "</a><span class='tweet--content'>" + response.statuses[i].full_text + "</span></div>";
           } else {
-            popin_twitter.innerHTML = popin_twitter.innerHTML + "<div class='tweet'><span class='tweet--name'>" + response.statuses[i].user.name + "</span><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "' class='tweet--id'>@" + response.statuses[i].user.screen_name + "</a><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "/status/" + response.statuses[i].id + "' class='tweet--date'>yo</a><span class='tweet--content'>" + response.statuses[i].full_text + "</span><img src='" + response.statuses[i].entities.media[0].media_url + "' class='tweet--picture'></img></div>";
+            popin_twitter.innerHTML = popin_twitter.innerHTML + "<div class='tweet'><span class='tweet--name'>" + response.statuses[i].user.name + "</span><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "' class='tweet--id'>@" + response.statuses[i].user.screen_name + "</a><a target='_blank' href='https://twitter.com/" + response.statuses[i].user.screen_name + "/status/" + response.statuses[i].id + "' class='tweet--date'>" + parseTwitterDate(response.statuses[i].created_at) + "</a><span class='tweet--content'>" + response.statuses[i].full_text + "</span><img src='" + response.statuses[i].entities.media[0].media_url + "' class='tweet--picture'></img></div>";
           }
         }
       }
@@ -200,31 +197,6 @@ function fetch_data() {
   });
 }
 
-function fetch_for_search(search_value) {
-  search_results.innerHTML = "";
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1;
-  var yyyy = today.getFullYear();
-
-  if (dd < 10) dd = '0' + dd;
-  if (mm < 10) mm = '0' + mm;
-  today = yyyy + '-' + mm + '-' + dd;
-
-  fetch('https://launchlibrary.net/1.2/launch/' + search_value).then(function (response) {
-    return response.json();
-  }).then(function (result) {
-    for (var i = 0; i < result.launches.length; i++) {
-      if (moment(result.launches[i].windowstart).format("YYYY-MM-DD") > today) {
-        var search_result = document.createElement("div");
-        search_result.innerHTML = result.launches[i].name;
-        search_results.appendChild(search_result);
-      }
-    }
-  });
-}
-
-<<<<<<< HEAD
 function showPage() {
   loader.classList.add('loader--fadeout');
   setTimeout(function () {
@@ -233,16 +205,57 @@ function showPage() {
 }
 setTimeout(showPage, 3000);
 
-//    var data = new FormData()
-//    data.append('name', 'John Doe')
-//    data.append('email', 'contact@local.dev')
-//    var xhr = getHttpRequest()
-//    xhr.open('POST', 'index.php', true)
-//    xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
-//    xhr.send(data)
+//Display correct date
+function parseTwitterDate(tdate) {
+  var system_date = new Date(Date.parse(tdate));
+  var user_date = new Date();
+  if (K.ie) {
+    system_date = Date.parse(tdate.replace(/( \+)/, ' UTC$1'));
+  }
+  var diff = Math.floor((user_date - system_date) / 1000);
+  if (diff <= 1) {
+    return "Just now";
+  }
+  if (diff < 20) {
+    return diff + " seconds ago";
+  }
+  if (diff < 40) {
+    return "A minute ago";
+  }
+  if (diff < 60) {
+    return "Less than a minute ago";
+  }
+  if (diff <= 90) {
+    return "A minute ago";
+  }
+  if (diff <= 3540) {
+    return Math.round(diff / 60) + " minutes ago";
+  }
+  if (diff <= 5400) {
+    return "A hour ago";
+  }
+  if (diff <= 86400) {
+    return Math.round(diff / 3600) + " hours ago";
+  }
+  if (diff <= 129600) {
+    return "A day ago";
+  }
+  if (diff < 604800) {
+    return Math.round(diff / 86400) + " days ago";
+  }
+  if (diff <= 777600) {
+    return "A week ago";
+  }
+  return system_date;
+}
 
-=======
->>>>>>> e834294d0f33ffbe1aab1f77e1150a1027d25187
+var K = function () {
+  var a = navigator.userAgent;
+  return {
+    ie: a.match(/MSIE\s([^;]*)/)
+  };
+}();
+
 },{}]},{},[1])
 
 //# sourceMappingURL=bundle.js.map
