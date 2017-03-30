@@ -17,5 +17,4 @@ catch (Exception $e)
   die('Could not connect');
 }
 
-define('URL','http://localhost:8888/');
-
+define('URL','http://localhost:8888/dist');

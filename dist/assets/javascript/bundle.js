@@ -166,7 +166,6 @@ function fetch_data() {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         var response = JSON.parse(this.responseText);
-        console.log(response);
         popin_twitter.innerHTML = "";
         if (response.statuses.length == 0) {
           popin_twitter.innerHTML = "No tweets found !";
@@ -180,7 +179,7 @@ function fetch_data() {
         }
       }
     };
-    xhttp.open("GET", "/api?name=" + popin_info_title.innerHTML, true);
+    xhttp.open("GET", "dist/api?name=" + popin_info_title.innerHTML, true);
     xhttp.send();
 
     popin_info_picture.setAttribute("src", result.launches[0].rocket.imageURL);
@@ -203,7 +202,7 @@ function showPage() {
     loader.remove();
   }, 500);
 }
-setTimeout(showPage, 3000);
+setTimeout(showPage, 2000);
 
 //Display correct date
 function parseTwitterDate(tdate) {
