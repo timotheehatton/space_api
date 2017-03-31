@@ -22,7 +22,8 @@ var   search_bar          = document.querySelector('.header--search--input'),
   popin_info_agency       = document.querySelector('.popin-agency'),
   popin_info_description  = document.querySelector('.popin-description'),
   popin_close             = document.querySelector('.popin--close'),
-  popin_live              = document.querySelector('.live--link'),
+  popin_live_link         = document.querySelector('.live--link'),
+  popin_live              = document.querySelector('.live'),
   loader                  = document.querySelector('.loader'),
   next_launch             = document.querySelector('.next--launch'),
   popin_twitter           = document.querySelector('.tweeter'),
@@ -64,10 +65,8 @@ window.addEventListener('resize', cover());
 
 //search
 search_bar.addEventListener("keyup", function(){
-  console.log("bruh");
   search_results.innerHTML = "";
   for(var i = 0; i < items.length; i++){
-    console.log("pop");
     if(items[i].querySelector(".item").querySelector(".item--content").querySelector("h2").innerHTML.toLowerCase().lastIndexOf(search_bar.value.toLowerCase())>-1){
         search_results.style.display="block";
         var search_result = document.createElement("a");
@@ -75,9 +74,6 @@ search_bar.addEventListener("keyup", function(){
         search_result.innerHTML = items[i].querySelector(".item").querySelector(".item--content").querySelector("h2").innerHTML;
         search_result.setAttribute("href", "index.php?rocket="+items[i].querySelector(".item").querySelector("input").value);
         search_results.appendChild(search_result);
-    }
-    else{
-      console.log("no");
     }
   }
 });
@@ -231,7 +227,11 @@ function fetch_data() {
         else
           popin_info_agency.innerHTML = popin_info_agency.innerHTML + ", " + result.launches[0].location.pads[0].agencies[i].name;
       }
-      popin_live.setAttribute('href', result.launches[0].vidURLs[0]);
+      if (result.launches[0].vidURLs.length>0) {
+        popin_live_link.setAttribute('href', result.launches[0].vidURLs[0]);
+      } else{
+        popin_live.innerHTML = "No live yet ! :(";
+      }
       popin_wiki.setAttribute('href', result.launches[0].rocket.wikiURL);
       popin_mission_hidden.value = result.launches[0].name;
     });
