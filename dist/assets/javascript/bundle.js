@@ -52,17 +52,19 @@ window.addEventListener('resize', cover());
 
 //search
 search_bar.addEventListener("keyup", function () {
+  console.log("bruh");
   search_results.innerHTML = "";
   for (var i = 0; i < items.length; i++) {
-    if (items[i].innerHTML.toUpperCase().lastIndexOf(search_bar.value) == -1) {
-      search_results.style.display = "none";
-    } else if (search_bar.value == "") {
-      search_results.style.display = "none";
-    } else {
+    console.log("pop");
+    if (items[i].querySelector(".item").querySelector(".item--content").querySelector("h2").innerHTML.toLowerCase().lastIndexOf(search_bar.value.toLowerCase()) > -1) {
       search_results.style.display = "block";
-      var search_result = document.createElement("span");
-      search_result.innerHTML = items[i].children[0].children[2].children[0].innerHTML;
+      var search_result = document.createElement("a");
+      search_result.classList.add("header--search--result");
+      search_result.innerHTML = items[i].querySelector(".item").querySelector(".item--content").querySelector("h2").innerHTML;
+      search_result.setAttribute("href", "index.php?rocket=" + items[i].querySelector(".item").querySelector("input").value);
       search_results.appendChild(search_result);
+    } else {
+      console.log("no");
     }
   }
 });

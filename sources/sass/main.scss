@@ -64,12 +64,18 @@ body {
       }
       &--results {
       width: 150%;
-      background: white;
+      background: grey;
       height: 400px;
       position: absolute;
       top: 100%;
       color: black;
       display: none;
+        overflow-y: scroll;
+      }
+      &--result{
+        width: 100%;
+        padding: 10px;
+        display: block;
       }
     }
     &--twitter {
