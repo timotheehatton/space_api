@@ -64,13 +64,13 @@ body {
       }
       &--results {
       width: 150%;
-      background: grey;
+      background: rgba($primary_color,.9);
       height: 400px;
       position: absolute;
       top: 100%;
-      color: black;
+      color: white;
       display: none;
-        overflow-y: scroll;
+      overflow-y: scroll;
       }
       &--result{
         width: 100%;

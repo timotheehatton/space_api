@@ -1,32 +1,36 @@
-var timeline = document.querySelector('.timeline'),
-  container = document.querySelector('.container'),
-  items = document.querySelectorAll('.item--container'),
-  btn_previous = document.querySelector('.previous'),
+var   search_bar          = document.querySelector('.header--search--input'),
+  search_results          = document.querySelector('.header--search--results'),
+
+  timeline                = document.querySelector('.timeline'),
+  container               = document.querySelector('.container'),
+  btn_previous            = document.querySelector('.previous'),
   window_width,
-  btn_next = document.querySelector('.next'),
-  popin = document.querySelector('.popin'),
-  current_btn = document.querySelector('.current--mission'),
-  item_btn = document.querySelectorAll('.item--content--btn'),
-  search_bar = document.querySelector('.header--search--input'),
-  search_results = document.querySelector('.header--search--results'),
-  id = document.querySelectorAll('.item--id'),
-  popin_info_title = document.querySelector('.popin--info--header--title'),
+  btn_next                = document.querySelector('.next'),
+    
+  items                   = document.querySelectorAll('.item--container'),
+  id                      = document.querySelectorAll('.item--id'),
+  current_btn             = document.querySelector('.current--mission'),
+  item_btn                = document.querySelectorAll('.item--content--btn'),
+
+  popin                   = document.querySelector('.popin'),
+  popin_info_title        = document.querySelector('.popin--info--header--title'),
   popin_info_title_hidden = document.querySelector('.popin--info--header--title--hidden'),
-  popin_info_picture = document.querySelector('.popin--info--header--picture img'),
-  popin_info_date = document.querySelector('.popin--info--header--date'),
-  popin_info_country = document.querySelector('.popin-country'),
-  popin_info_mission = document.querySelector('.popin-mission'),
-  popin_info_agency = document.querySelector('.popin-agency'),
-  popin_info_description = document.querySelector('.popin-description'),
-  popin_close = document.querySelector('.popin--close'),
-  popin_live = document.querySelector('.live--link'),
-  loader = document.querySelector('.loader'),
-  next_launch = document.querySelector('.next--launch'),
-  popin_twitter = document.querySelector('.tweeter'),
-  popin_wiki = document.querySelector('.popin--info--content--rocket--link'),
-  popin_mission_hidden = document.querySelector('.mission--hidden');
+  popin_info_picture      = document.querySelector('.popin--info--header--picture img'),
+  popin_info_date         = document.querySelector('.popin--info--header--date'),
+  popin_info_country      = document.querySelector('.popin-country'),
+  popin_info_mission      = document.querySelector('.popin-mission'),
+  popin_info_agency       = document.querySelector('.popin-agency'),
+  popin_info_description  = document.querySelector('.popin-description'),
+  popin_close             = document.querySelector('.popin--close'),
+  popin_live              = document.querySelector('.live--link'),
+  loader                  = document.querySelector('.loader'),
+  next_launch             = document.querySelector('.next--launch'),
+  popin_twitter           = document.querySelector('.tweeter'),
+  popin_wiki              = document.querySelector('.popin--info--content--rocket--link'),
+  popin_mission_hidden    = document.querySelector('.mission--hidden');
 
 
+//GET VAR FROM URL
 function getUrlVars() {
   var vars = {};
   var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
@@ -37,6 +41,15 @@ function getUrlVars() {
 
 var url = getUrlVars()["rocket"];
 
+
+//LOADER
+function showPage() {
+  loader.classList.add('loader--fadeout');
+  setTimeout(function () {
+    loader.remove();
+  }, 500);
+}
+setTimeout(showPage, 2000);
 
 //screen cover
 function cover() {
@@ -184,6 +197,7 @@ function fetch_data() {
     .then((result) => {
       popin_info_title.innerHTML = result.launches[0].rocket.name;
 
+      //GET TWITTER SEARCH REQUEST
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -207,8 +221,9 @@ function fetch_data() {
       popin_info_picture.setAttribute("src", result.launches[0].rocket.imageURL);
       popin_info_date.innerHTML = result.launches[0].windowstart;
       popin_info_country.innerHTML = result.launches[0].location.name;
-      if (result.launches[0].missions != undefined) {
+      if (result.launches[0].missions.length>0) {
         popin_info_mission.innerHTML = result.launches[0].missions[0].name;
+        popin_info_description.innerHTML = result.launches[0].missions[0].description;
       }
       for (var i = 0; i < result.launches[0].location.pads[0].agencies.length; i++) {
         if (i === 0)
@@ -216,7 +231,6 @@ function fetch_data() {
         else
           popin_info_agency.innerHTML = popin_info_agency.innerHTML + ", " + result.launches[0].location.pads[0].agencies[i].name;
       }
-      popin_info_description.innerHTML = result.launches[0].missions[0].description;
       popin_live.setAttribute('href', result.launches[0].vidURLs[0]);
       popin_wiki.setAttribute('href', result.launches[0].rocket.wikiURL);
       popin_mission_hidden.value = result.launches[0].name;
@@ -224,15 +238,7 @@ function fetch_data() {
 }
 
 
-function showPage() {
-  loader.classList.add('loader--fadeout');
-  setTimeout(function () {
-    loader.remove();
-  }, 500);
-}
-setTimeout(showPage, 2000);
-
-//Display correct date
+//Display correct date for tweets
 function parseTwitterDate(tdate) {
   var system_date = new Date(Date.parse(tdate));
   var user_date = new Date();

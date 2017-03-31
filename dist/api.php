@@ -26,3 +26,4 @@
   $results = search($query);
   
   echo json_encode($results);
+?>

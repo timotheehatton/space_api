@@ -54,11 +54,11 @@ body {
         color: #d0d233; }
       .container .header--search--results {
         width: 150%;
-        background: grey;
+        background: rgba(16, 32, 44, 0.9);
         height: 400px;
         position: absolute;
         top: 100%;
-        color: black;
+        color: white;
         display: none;
         overflow-y: scroll; }
       .container .header--search--result {

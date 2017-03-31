@@ -1,5 +1,5 @@
 <?php
-require "twitter_files/autoload.php";
+require "../twitter_files/autoload.php";
 
 
 use Abraham\TwitterOAuth\TwitterOAuth;

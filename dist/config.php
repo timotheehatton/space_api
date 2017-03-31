@@ -2,7 +2,8 @@
 define('DB_HOST','launchnehjspace.mysql.db');
 define('DB_NAME','launchnehjspace');
 define('DB_USER','launchnehjspace');
-define('DB_PASS','1677Swidswid'); // '' par défaut sur windows
+define('DB_PASS','1677Swidswid');
+define('URL','http://launch-news.space/');
 
 try
 {
@@ -18,4 +19,4 @@ catch (Exception $e)
     die('Could not connect');
 }
 
-define('URL','http://launch-news.space/');
+
