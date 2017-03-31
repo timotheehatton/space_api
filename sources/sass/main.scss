@@ -367,6 +367,10 @@ body {
   transform: translateY(100%);
   display: flex;
   color: #fefefe;
+  @media screen and (max-width: 950px) {
+    flex-direction: column;
+    align-items: center;
+  }
   &--close {
     height: 40px;
     width: 40px;

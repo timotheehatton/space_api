@@ -308,6 +308,12 @@ body {
   display: -ms-flexbox;
   display: flex;
   color: #fefefe; }
+  @media screen and (max-width: 950px) {
+    .popin {
+      -ms-flex-direction: column;
+          flex-direction: column;
+      -ms-flex-align: center;
+          align-items: center; } }
   .popin--close {
     height: 40px;
     width: 40px;
